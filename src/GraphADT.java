@@ -1,2 +1,2 @@
-public class GraphADT {
+public class GraphADT implements GraphInterface{
 }
