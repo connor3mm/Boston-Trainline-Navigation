@@ -1,2 +1,2 @@
-public interface GraphADT {
+public class GraphADT {
 }
