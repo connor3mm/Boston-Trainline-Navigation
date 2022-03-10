@@ -1,20 +1,10 @@
 import java.util.ArrayList;
 
-public class GraphADT implements GraphInterface<Station,EdgeColourLine>{
+public interface GraphADT<N,E> {
 
-    @Override
-    public void addVertex() {
+    public void addStation(Station station);
 
-    }
+    public void addEdge(Neighbour edge);
 
-    @Override
-    public void addEdge() {
-
-    }
-
-    @Override
-    public ArrayList<Station> getNeighbouringNodes() {
-        return null;
-    }
-
+    public ArrayList<N> getNeighbouringNodes();
 }
