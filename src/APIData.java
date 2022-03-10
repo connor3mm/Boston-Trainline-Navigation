@@ -9,14 +9,19 @@ public class APIData {
 
     public static void main(String[] args) {
         APIData something = new APIData();
-        GraphImplementation graph = something.readFromAFile();
+        //GraphImplementation graph = something.readFromAFile();
+
+        MetroModel model = new MetroModel();
+        model.initializeGraph();
+
 
 
     }
 
-    public GraphImplementation readFromAFile() {
+    public List<Station> readFromAFile() {
         //first two always same
         //color 2 numbers
+        List<Station> stations = new ArrayList<>();
 
         try {
             File myObj = new File("src/StationFile/bostonmetro.txt");
@@ -34,19 +39,22 @@ public class APIData {
                 String[] stationInformation = currentLine[0].split(" ");
 
                 //Add current station to the graph
-                graph.addStation(new Station(stationInformation[0], stationInformation[1]));
+                //graph.addStation(new Station(stationInformation[0], stationInformation[1]));
 
                 //Add edge (neighbours)
                 String[] edgeInformation = currentLine[1].split("\\s+");
-
+                List<Neighbour> neighbours = new ArrayList<>();
                 int i = 0;
                 while (i < edgeInformation.length) {
-                    graph.addEdge(new Neighbour(edgeInformation[i], edgeInformation[i+1], edgeInformation[i+2]));
+                    neighbours.add(new Neighbour(edgeInformation[i], edgeInformation[i+1], edgeInformation[i+2]));
+                    //graph.addEdge(new Neighbour(edgeInformation[i], edgeInformation[i+1], edgeInformation[i+2]));
                     i += 3;
                 }
+                Station currentStation1 = new Station(stationInformation[0], stationInformation[1], neighbours);
+                stations.add(currentStation1);
             }
             myReader.close();
-            return graph;
+            return stations;
         } catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();

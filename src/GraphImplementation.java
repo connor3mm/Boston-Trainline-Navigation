@@ -17,13 +17,32 @@ public class GraphImplementation implements GraphADT<Station,EdgeColourLine> {
 
     @Override
     public void addStation(Station station) {
-
+        stations.add(station);
+        adjacentStations.putIfAbsent(station, new ArrayList<>());
 
     }
 
     @Override
-    public void addEdge(Neighbour edge) {
-        this.edges.add(edge);
+    public void addEdge(Station station) {
+       //we want to create our map
+        //create the edge between two stations
+        List<Neighbour> neighbours = station.getNeighbouringStations();
+        for(Neighbour neighbour: neighbours) {
+            adjacentStations.get(station).add(neighbour);
+        }
+
+        for (Map.Entry<Station, List<Neighbour>> entry : adjacentStations.entrySet()) {
+            System.out.println("-----------------------------------");
+            System.out.println(entry.getKey().getStationName());
+
+            for(Neighbour n: entry.getValue()) {
+                System.out.println(n.getLineColour());
+                System.out.println(n.getPreviousStationID());
+                System.out.println(n.getNextStationId());
+
+            }
+            System.out.println("-----------------------------------");
+        }
 
     }
 
