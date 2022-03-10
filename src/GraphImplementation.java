@@ -3,7 +3,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class GraphImplementation implements GraphADT<Station,EdgeColourLine> {
+public class GraphImplementation implements GraphADT<Station,Neighbour> {
 
     private List<Station> stations;
     private List<Neighbour> edges;
@@ -18,7 +18,10 @@ public class GraphImplementation implements GraphADT<Station,EdgeColourLine> {
     @Override
     public void addStation(Station station) {
         stations.add(station);
-        adjacentStations.putIfAbsent(station, new ArrayList<>());
+        if(!adjacentStations.containsKey(station)) {
+            adjacentStations.put(station, new ArrayList<>());
+        }
+
 
     }
 
