@@ -47,10 +47,11 @@ public class GraphImplementation implements GraphADT<Station,EdgeColourLine> {
     }
 
     @Override
-    public ArrayList<Station> getNeighbouringNodes() {
+    public List<Neighbour> getNeighbouringNodes(Station station) {
         //specify a station
         //for the specified station we want to get the ones that are connected to it
-        return null;
+        //return a list of neighbours for a given station
+        return adjacentStations.get(station);
     }
 
     public List<Station> getStations() {

@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public interface GraphADT<N,E> {
 
@@ -6,5 +7,5 @@ public interface GraphADT<N,E> {
 
     public void addEdge(Station station);
 
-    public ArrayList<N> getNeighbouringNodes();
+    public List<Neighbour> getNeighbouringNodes(Station station);
 }
