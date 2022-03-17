@@ -1,9 +1,11 @@
 public class Neighbour {
+    private Station currentStation;
     private String lineColour;
     private String previousStationID;
     private String nextStationId;
 
-    public Neighbour(String lineColour, String previousStationID, String nextStationId) {
+    public Neighbour(Station currentStation, String lineColour, String previousStationID, String nextStationId) {
+        this.currentStation = currentStation;
         this.lineColour = lineColour;
         this.previousStationID = previousStationID;
         this.nextStationId = nextStationId;
@@ -31,5 +33,13 @@ public class Neighbour {
 
     public void setNextStationId(String nextStationId) {
         this.nextStationId = nextStationId;
+    }
+
+    public Station getCurrentStation() {
+        return currentStation;
+    }
+
+    public void setCurrentStation(Station currentStation) {
+        this.currentStation = currentStation;
     }
 }

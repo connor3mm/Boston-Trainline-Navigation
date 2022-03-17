@@ -1,11 +1,12 @@
+import java.sql.SQLOutput;
 import java.util.List;
+import java.util.Map;
 
 public class MetroModel {
     public static GraphImplementation graph;
-    public static void main(String[] args) {
-        APIData something = new APIData();
-        //GraphImplementation graph = something.readFromAFile();
 
+
+    public static void main(String[] args) {
         MetroModel model = new MetroModel();
         model.initializeGraph();
         List<Station> stations = graph.getStations();
@@ -19,14 +20,22 @@ public class MetroModel {
     public void initializeGraph() {
         graph = new GraphImplementation();
         APIData data = new APIData();
-        List<Station> stations = data.readFromAFile();
+        data.readFromAFile();
+        List<Station> stations = data.getStations();
+        List<Neighbour> neighbours = data.getNeighbours();
 
-        for(Station station: stations) {
+        graph.addStation(new Station("0", "departure"));
+        for (Station station : stations) {
             graph.addStation(station);
-            graph.addEdge(station);
         }
 
 
+        for (Neighbour neighbour : neighbours) {
+            graph.addEdge(neighbour);
+        }
+
+
+        graph.displayMap();
     }
 
 }
