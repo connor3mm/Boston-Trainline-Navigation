@@ -18,10 +18,13 @@ public class APIData {
 
     }
 
-    public List<Station> readFromAFile() {
+    private List<Station> stations = new ArrayList<>();
+    private List<Neighbour> neighbours = new ArrayList<>();
+
+    public void readFromAFile() {
         //first two always same
         //color 2 numbers
-        List<Station> stations = new ArrayList<>();
+//        List<Station> stations = new ArrayList<>();
 
         try {
             File myObj = new File("src/StationFile/bostonmetro.txt");
@@ -43,22 +46,28 @@ public class APIData {
 
                 //Add edge (neighbours)
                 String[] edgeInformation = currentLine[1].split("\\s+");
-                List<Neighbour> neighbours = new ArrayList<>();
+//                List<Neighbour> neighbours = new ArrayList<>();
                 int i = 0;
                 while (i < edgeInformation.length) {
                     neighbours.add(new Neighbour(edgeInformation[i], edgeInformation[i+1], edgeInformation[i+2]));
                     //graph.addEdge(new Neighbour(edgeInformation[i], edgeInformation[i+1], edgeInformation[i+2]));
                     i += 3;
                 }
-                Station currentStation1 = new Station(stationInformation[0], stationInformation[1], neighbours);
+                Station currentStation1 = new Station(stationInformation[0], stationInformation[1]);
                 stations.add(currentStation1);
             }
             myReader.close();
-            return stations;
         } catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
-        return null;
+    }
+
+    public List<Station> getStations() {
+        return this.stations;
+    }
+
+    public List<Neighbour> getNeighbours() {
+        return this.neighbours;
     }
 }

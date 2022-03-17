@@ -1,4 +1,5 @@
 import java.util.List;
+import java.util.Map;
 
 public class MetroModel {
     public static GraphImplementation graph;
@@ -17,16 +18,23 @@ public class MetroModel {
     }
 
     public void initializeGraph() {
+        //
         graph = new GraphImplementation();
         APIData data = new APIData();
-        List<Station> stations = data.readFromAFile();
+        data.readFromAFile();
+        List<Station> stations = data.getStations();
+        List<Neighbour> neighbours = data.getNeighbours();
 
+        graph.addStation(new Station("0", "idk"));
         for(Station station: stations) {
             graph.addStation(station);
-            graph.addEdge(station);
         }
 
+        for(Neighbour neighbour: neighbours) {
+            graph.addEdge(neighbour);
+        }
 
+        graph.displayMap();
     }
 
 }
