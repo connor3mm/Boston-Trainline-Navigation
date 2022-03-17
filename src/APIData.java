@@ -6,26 +6,10 @@ import java.util.List;
 import java.util.Scanner;
 
 public class APIData {
-
-    public static void main(String[] args) {
-        APIData something = new APIData();
-        //GraphImplementation graph = something.readFromAFile();
-
-        MetroModel model = new MetroModel();
-        model.initializeGraph();
-
-
-
-    }
-
     private List<Station> stations = new ArrayList<>();
     private List<Neighbour> neighbours = new ArrayList<>();
 
     public void readFromAFile() {
-        //first two always same
-        //color 2 numbers
-//        List<Station> stations = new ArrayList<>();
-
         try {
             File myObj = new File("src/StationFile/bostonmetro.txt");
             Scanner myReader = new Scanner(myObj);
@@ -42,21 +26,21 @@ public class APIData {
                 String[] stationInformation = currentLine[0].split(" ");
 
                 //Add current station to the graph
-                //graph.addStation(new Station(stationInformation[0], stationInformation[1]));
-
                 //Add edge (neighbours)
                 String[] edgeInformation = currentLine[1].split("\\s+");
-//                List<Neighbour> neighbours = new ArrayList<>();
+
+                Station currentStation1 = new Station(stationInformation[0], stationInformation[1]);
+
                 int i = 0;
                 while (i < edgeInformation.length) {
-                    neighbours.add(new Neighbour(edgeInformation[i], edgeInformation[i+1], edgeInformation[i+2]));
-                    //graph.addEdge(new Neighbour(edgeInformation[i], edgeInformation[i+1], edgeInformation[i+2]));
+                    neighbours.add(new Neighbour(currentStation1, edgeInformation[i], edgeInformation[i + 1], edgeInformation[i + 2]));
                     i += 3;
                 }
-                Station currentStation1 = new Station(stationInformation[0], stationInformation[1]);
+
                 stations.add(currentStation1);
             }
             myReader.close();
+
         } catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();

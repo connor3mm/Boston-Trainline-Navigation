@@ -13,7 +13,6 @@ public class GraphImplementation implements GraphADT<Station, Neighbour> {
         stations = new ArrayList<>();
         edges = new ArrayList<>();
         stationToNeighbourMap = new HashMap<>();
-        stationToNeighbourMap.put(new Station("0", "idk lol"), new ArrayList<>());
     }
 
     @Override
@@ -24,26 +23,14 @@ public class GraphImplementation implements GraphADT<Station, Neighbour> {
         }
     }
 
+    /**
+     * adding neighbour to edges list, then adding everything to stations to neighbour map
+     * @param neighbour
+     */
     @Override
     public void addEdge(Neighbour neighbour) {
-        //we want to create our map
-        //create the edge between two stations
-        //Change to neighbour
-        //helper function to get station with given id from neighbour (2 stations)
-
-        //Station list of neighbours
-        //Neighbour with two stations
-
-
         edges.add(neighbour);
-
-
-        Station prevStation = getNeighbourStations(neighbour.getPreviousStationID());
-        Station nextStation = getNeighbourStations(neighbour.getNextStationId());
-
-
-        stationToNeighbourMap.get(prevStation).add(neighbour);
-        stationToNeighbourMap.get(nextStation).add(neighbour);
+        stationToNeighbourMap.get(neighbour.getCurrentStation()).add(neighbour);
     }
 
     public void displayMap() {
@@ -59,15 +46,6 @@ public class GraphImplementation implements GraphADT<Station, Neighbour> {
             }
             System.out.println("-----------------------------------");
         }
-    }
-
-    public Station getNeighbourStations(String id) {
-        for (Station currentStation : this.stations) {
-            if (currentStation.getId().equals(id)) {
-                return currentStation;
-            }
-        }
-        return null;
     }
 
 
