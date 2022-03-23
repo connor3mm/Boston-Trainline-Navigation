@@ -1,17 +1,18 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Station {
-    private int id;
+    private String id;
     private String stationName;
-    private ArrayList<Neighbour> neighbouringStations;
+//    private List<Neighbour> neighbouringStations;
 
-    public Station(int id, String stationName, ArrayList<Neighbour> neighbouringStations) {
+    public Station(String id, String stationName) {
         this.id = id;
         this.stationName = stationName;
-        this.neighbouringStations = neighbouringStations;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
@@ -19,11 +20,11 @@ public class Station {
         return stationName;
     }
 
-    public ArrayList<Neighbour> getNeighbouringStations() {
-        return neighbouringStations;
-    }
+//    public List<Neighbour> getNeighbouringStations() {
+//        return neighbouringStations;
+//    }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -31,7 +32,7 @@ public class Station {
         this.stationName = stationName;
     }
 
-    public void setNeighbouringStations(ArrayList<Neighbour> neighbouringStations) {
-        this.neighbouringStations = neighbouringStations;
-    }
+//    public void setNeighbouringStations(ArrayList<Neighbour> neighbouringStations) {
+//        this.neighbouringStations = neighbouringStations;
+//    }
 }
