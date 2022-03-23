@@ -1,4 +1,5 @@
 import java.sql.SQLOutput;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -36,6 +37,10 @@ public class MetroModel {
 
 
         graph.displayMap();
+
+        System.out.println("===================================================");
+        ArrayList<String> lmao = graph.findRoute("11", "54");
+        System.out.println("RESULT: " + lmao);
     }
 
 }
