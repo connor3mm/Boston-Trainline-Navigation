@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class GraphImplementation implements GraphADT<Station, Neighbour> {
 
@@ -59,7 +56,60 @@ public class GraphImplementation implements GraphADT<Station, Neighbour> {
         return this.stations;
     }
 
+//    public List<Station> getStation(Station S){
+//
+//    }
+
     public List<Neighbour> getEdges() {
         return this.edges;
     }
+
+
+    public ArrayList<Station> calculateRoute( Map<Station, List<Neighbour>> stationToNeighbourMap, Station startId, Station endId) {
+
+        int prev = solve(startId);
+
+
+        return reconstructPath(startId, endId, prev);
+    }
+
+
+    public int solve(Station startStation, Station endStation) {
+        Queue<Station> agenda = new LinkedList<>();
+        ArrayList<String> visited = new ArrayList<String>();
+
+        agenda.add(startStation);
+        visited.add(startStation.getId());
+
+        Station node = startStation;
+        List<Neighbour> neighbours;
+
+        while (!agenda.isEmpty()){
+            node = agenda.remove();
+            neighbours = getNeighbouringNodes(node);
+
+            for(Neighbour next : neighbours){
+
+              //  if (!visited[next]){
+
+                //}
+            }
+
+
+
+        }
+
+
+        return 1;  //prev
+    }
+
+
+    public ArrayList<Station> reconstructPath(Station startId, Station endId, int prev) {
+
+        return null;
+    }
+
+
+
+
 }
