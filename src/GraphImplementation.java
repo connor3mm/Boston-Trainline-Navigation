@@ -65,42 +65,48 @@ public class GraphImplementation implements GraphADT<Station, Neighbour> {
     }
 
 
-    public ArrayList<Station> calculateRoute( Map<Station, List<Neighbour>> stationToNeighbourMap, Station startId, Station endId) {
+//    public ArrayList<Station> calculateRoute( Map<Station, List<Neighbour>> stationToNeighbourMap, Station startId, Station endId) {
+//
+//        int prev = solve(startId);
+//
+//
+//        return reconstructPath(startId, endId, prev);
+//    }
 
-        int prev = solve(startId);
 
-
-        return reconstructPath(startId, endId, prev);
-    }
-
-
-    public int solve(Station startStation, Station endStation) {
-        Queue<Station> agenda = new LinkedList<>();
-        ArrayList<String> visited = new ArrayList<String>();
-
-        agenda.add(startStation);
-        visited.add(startStation.getId());
-
-        Station node = startStation;
+    public ArrayList<String> findRoute(String startStation, String endStation) {
+        Queue<ArrayList<String>> agenda = new LinkedList<>();
+        ArrayList<String> visited = new ArrayList<>();
+        ArrayList<String> stationsIDs = new ArrayList<>();
+        stationsIDs.add(startStation);
+        agenda.add(stationsIDs);
+        visited.add(startStation);
+        ArrayList<String> currentNodePath;
         List<Neighbour> neighbours;
 
         while (!agenda.isEmpty()){
-            node = agenda.remove();
-            neighbours = getNeighbouringNodes(node);
-
-            for(Neighbour next : neighbours){
-
-              //  if (!visited[next]){
-
-                //}
+            currentNodePath = agenda.poll();
+            //getting the last element of the current path and check if it is the end station then return the path
+            if(currentNodePath.get(currentNodePath.size()-1).equals(endStation)) {
+                return currentNodePath;
             }
 
+            ArrayList<String> nextStates;
+            nextStates = extendPath(currentNodePath);
+
+            for(String currentState: nextStates) {
+                String lastElement = nextStates.get(nextStates.size() - 1);
+                if(!visited.contains(lastElement)){
+                    visited.add(lastElement);
+                    //agenda.add(ne);
+                }
+            }
 
 
         }
 
 
-        return 1;  //prev
+        return null;  //prev
     }
 
 
@@ -109,7 +115,30 @@ public class GraphImplementation implements GraphADT<Station, Neighbour> {
         return null;
     }
 
+    public Station getStationFromId(String id) {
+        for(Station currentStation: this.stations) {
+            if(currentStation.getId().equals(id)) {
+                return currentStation;
+            }
+        }
+        return null;
+    }
 
+    public ArrayList<String> extendPath(ArrayList<String> currentPathNode) {
+        ArrayList<String> neighbourIds = new ArrayList<>();
+        List<Neighbour> neighbourList = new ArrayList<>();
+        for(String currentId : currentPathNode) {
+            Station currentStation = getStationFromId(currentId);
+            neighbourList = getNeighbouringNodes(currentStation);
+        }
+
+        for(Neighbour currentNeighbour: neighbourList) {
+            neighbourIds.add(currentNeighbour.getPreviousStationID());
+            neighbourIds.add(currentNeighbour.getNextStationId());
+        }
+
+        return neighbourIds;
+    }
 
 
 }
