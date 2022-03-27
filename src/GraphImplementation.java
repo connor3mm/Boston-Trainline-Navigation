@@ -84,14 +84,19 @@ public class GraphImplementation implements GraphADT<Station, Neighbour> {
             currentNodePath = agenda.poll();
             currentNode = currentNodePath.get(currentNodePath.size() - 1);
 
+            if (visited.contains(currentNode)) {
+                continue;
+            }
+
             visited.add(currentNode);
+
 
             //Getting the last element of the current path and check if it is the end station then return the path
             if (currentNodePath.contains(endStation)) {
                 return currentNodePath;
             }
 
-            //Gets neighbours of current station
+            //Get neighbours of current station
             ArrayList<String> agendaList = extendPath(currentNode);
 
             ArrayList<ArrayList<String>> finalOutput = new ArrayList<>();
@@ -103,11 +108,8 @@ public class GraphImplementation implements GraphADT<Station, Neighbour> {
                 tempNode = tempList.get(tempList.size() - 1);
 
                 tempList.add(neigh);
+                finalOutput.add(tempList);
 
-                if (!visited.contains(tempNode)) {
-                    finalOutput.add(tempList);
-                    visited.add(tempNode);
-                }
             }
             agenda.addAll(finalOutput);
         }
@@ -126,6 +128,7 @@ public class GraphImplementation implements GraphADT<Station, Neighbour> {
 
     /**
      * finds the neighbours of current node.
+     *
      * @param currentPathNode
      * @return Arraylist of neighbours
      */
@@ -148,19 +151,30 @@ public class GraphImplementation implements GraphADT<Station, Neighbour> {
 
     /**
      * Calculates how many line switches between start node and end node
+     *
      * @param endPath
      * @return integer of line switches
      */
     public int calculateLineSwitching(List<String> endPath) {
 
-        int lineSwitchTotal;
-        String currentColour;
+        int lineSwitchTotal = 0;
+        String currentColour = null;
         List<Neighbour> neighbourList;
 
 
-        for (String node : endPath) {
-            Station station = getStationFromId(node);
+        for (int i = 0; i < endPath.size(); i++) {
+            Station station = getStationFromId(endPath.get(i));
+            List<Neighbour> temp = getNeighbouringNodes(station);
 
+            for (Neighbour neigh : temp) {
+                if (neigh.getPreviousStationID().equals(endPath.get(i + 1)) || neigh.getNextStationId().equals(endPath.get(i + 1))) {
+                    String tempLineColour = neigh.getLineColour();
+                    if ((!currentColour.equals(tempLineColour)) && (currentColour != null)) {
+                        lineSwitchTotal += 1;
+                    }
+                    currentColour = tempLineColour;
+                }
+            }
         }
 
 

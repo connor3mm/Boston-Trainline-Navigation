@@ -41,7 +41,7 @@ public class MetroModel {
 
         //Test for dfs search TO BE REMOVED
         System.out.println("===================================================");
-        List<String> endPath = graph.findRoute("69", "59");
+        List<String> endPath = graph.findRoute("4", "59");
         System.out.println("RESULT: " + endPath);
     }
 
