@@ -104,12 +104,10 @@ public class GraphImplementation implements GraphADT<Station, Neighbour> {
             ArrayList<String> agendaList = extendPath(currentNode);
 
             ArrayList<ArrayList<String>> finalOutput = new ArrayList<>();
-            String tempNode;
 
             //For every neighbour of current node, create new array and append neighbour, if neigh is not in visited list
             for (String neigh : agendaList) {
                 ArrayList<String> tempList = new ArrayList<>(currentNodePath);
-                tempNode = tempList.get(tempList.size() - 1);
 
                 tempList.add(neigh);
                 finalOutput.add(tempList);
