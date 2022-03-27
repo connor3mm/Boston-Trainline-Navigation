@@ -1,4 +1,3 @@
-import java.lang.reflect.Array;
 import java.util.*;
 
 public class GraphImplementation implements GraphADT<Station, Neighbour> {
@@ -14,6 +13,21 @@ public class GraphImplementation implements GraphADT<Station, Neighbour> {
     }
 
     @Override
+    public List<Neighbour> getNeighbouringNodes(Station station) {
+        //return a list of neighbours for a given station
+        return stationToNeighbourMap.get(station);
+    }
+
+    public List<Station> getStations() {
+        return this.stations;
+    }
+
+    public List<Neighbour> getEdges() {
+        return this.edges;
+    }
+
+
+    @Override
     public void addStation(Station station) {
         stations.add(station);
         if (!stationToNeighbourMap.containsKey(station)) {
@@ -23,6 +37,7 @@ public class GraphImplementation implements GraphADT<Station, Neighbour> {
 
     /**
      * adding neighbour to edges list, then adding everything to stations to neighbour map
+     *
      * @param neighbour
      */
     @Override
@@ -30,6 +45,7 @@ public class GraphImplementation implements GraphADT<Station, Neighbour> {
         edges.add(neighbour);
         stationToNeighbourMap.get(neighbour.getCurrentStation()).add(neighbour);
     }
+
 
     public void displayMap() {
         for (Map.Entry<Station, List<Neighbour>> entry : stationToNeighbourMap.entrySet()) {
@@ -46,100 +62,109 @@ public class GraphImplementation implements GraphADT<Station, Neighbour> {
         }
     }
 
-
-    @Override
-    public List<Neighbour> getNeighbouringNodes(Station station) {
-        //return a list of neighbours for a given station
-        return stationToNeighbourMap.get(station);
-    }
-
-    public List<Station> getStations() {
-        return this.stations;
-    }
-
-//    public List<Station> getStation(Station S){
-//
-//    }
-
-    public List<Neighbour> getEdges() {
-        return this.edges;
-    }
-
-
-//    public ArrayList<Station> calculateRoute( Map<Station, List<Neighbour>> stationToNeighbourMap, Station startId, Station endId) {
-//
-//        int prev = solve(startId);
-//
-//
-//        return reconstructPath(startId, endId, prev);
-//    }
-
-
-    public ArrayList<String> findRoute(String startStation, String endStation) {
-        Queue<ArrayList<String>> agenda = new LinkedList<>(); //this should probably be just a String
-        ArrayList<ArrayList<String>> visited = new ArrayList<>(); //this needs to change lmao
+    /**
+     * Takes start and end station, finds the shortest path using Breadth first search
+     *
+     * @param startStation
+     * @param endStation
+     * @return Final array of the path from start station to end
+     */
+    public List<String> findRoute(String startStation, String endStation) {
+        List<String> visited = new ArrayList<>();
+        Queue<List<String>> agenda = new LinkedList<>();
         ArrayList<String> stationsIDs = new ArrayList<>();
+        List<String> currentNodePath;
+        String currentNode;
+
+
         stationsIDs.add(startStation);
         agenda.add(stationsIDs);
-        ArrayList<String> currentNodePath;
-        List<Neighbour> neighbours;
 
-        while (agenda.size() != 0){
-            System.out.println("Agenda: " +agenda);
+        while (agenda.size() != 0) {
             currentNodePath = agenda.poll();
+            currentNode = currentNodePath.get(currentNodePath.size() - 1);
 
-            if(visited.contains(currentNodePath)){
-                continue;
-            }
+            visited.add(currentNode);
 
-            visited.add(currentNodePath);
-
-            //getting the last element of the current path and check if it is the end station then return the path
-            if(currentNodePath.get(currentNodePath.size()-1).equals(endStation)) {
+            //Getting the last element of the current path and check if it is the end station then return the path
+            if (currentNodePath.contains(endStation)) {
                 return currentNodePath;
             }
 
-//            ArrayList<String> nextStates;
-            agenda.add(extendPath(currentNodePath));
-//
-//            for(String currentState: nextStates) {
-//                String lastElement = nextStates.get(nextStates.size() - 1);
-//                if(!visited.contains(lastElement)){
-//                    visited.add(lastElement);
-//                    //agenda.add(ne);
-//                }
-//            }
+            //Gets neighbours of current station
+            ArrayList<String> agendaList = extendPath(currentNode);
 
+            ArrayList<ArrayList<String>> finalOutput = new ArrayList<>();
+            String tempNode;
 
+            //For every neighbour of current node, create new array and append neighbour, if neigh is not in visited list
+            for (String neigh : agendaList) {
+                ArrayList<String> tempList = new ArrayList<>(currentNodePath);
+                tempNode = tempList.get(tempList.size() - 1);
+
+                tempList.add(neigh);
+
+                if (!visited.contains(tempNode)) {
+                    finalOutput.add(tempList);
+                    visited.add(tempNode);
+                }
+            }
+            agenda.addAll(finalOutput);
         }
-
-
-        return null;  //prev
+        return null;
     }
 
+
     public Station getStationFromId(String id) {
-        for(Station currentStation: this.stations) {
-            if(currentStation.getId().equals(id)) {
+        for (Station currentStation : this.stations) {
+            if (currentStation.getId().equals(id)) {
                 return currentStation;
             }
         }
         return null;
     }
 
-    public ArrayList<String> extendPath(ArrayList<String> currentPathNode) {
+    /**
+     * finds the neighbours of current node.
+     * @param currentPathNode
+     * @return Arraylist of neighbours
+     */
+    public ArrayList<String> extendPath(String currentPathNode) {
         ArrayList<String> neighbourIds = new ArrayList<>();
-        List<Neighbour> neighbourList = new ArrayList<>();
-        for(String currentId : currentPathNode) {
-            Station currentStation = getStationFromId(currentId);
-            neighbourList = getNeighbouringNodes(currentStation);
-        }
+        List<Neighbour> neighbourList;
 
-        for(Neighbour currentNeighbour: neighbourList) {
+        Station currentStation = getStationFromId(currentPathNode);
+        neighbourList = getNeighbouringNodes(currentStation);
+
+
+        for (Neighbour currentNeighbour : neighbourList) {
             neighbourIds.add(currentNeighbour.getPreviousStationID());
             neighbourIds.add(currentNeighbour.getNextStationId());
         }
 
         return neighbourIds;
+    }
+
+
+    /**
+     * Calculates how many line switches between start node and end node
+     * @param endPath
+     * @return integer of line switches
+     */
+    public int calculateLineSwitching(List<String> endPath) {
+
+        int lineSwitchTotal;
+        String currentColour;
+        List<Neighbour> neighbourList;
+
+
+        for (String node : endPath) {
+            Station station = getStationFromId(node);
+
+        }
+
+
+        return 0;
     }
 
 

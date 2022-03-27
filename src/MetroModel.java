@@ -1,3 +1,4 @@
+import java.sql.Array;
 import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,10 +13,10 @@ public class MetroModel {
         model.initializeGraph();
         List<Station> stations = graph.getStations();
         List<Neighbour> s = graph.getNeighbouringNodes(stations.get(6));
-        System.out.println(stations.get(6).getStationName());
-        System.out.println(s.get(0).getLineColour());
-        System.out.println(s.get(0).getPreviousStationID());
-        System.out.println(s.get(0).getNextStationId());
+//        System.out.println(stations.get(6).getStationName());
+//        System.out.println(s.get(0).getLineColour());
+//        System.out.println(s.get(0).getPreviousStationID());
+//        System.out.println(s.get(0).getNextStationId());
     }
 
     public void initializeGraph() {
@@ -38,9 +39,10 @@ public class MetroModel {
 
         graph.displayMap();
 
+        //Test for dfs search TO BE REMOVED
         System.out.println("===================================================");
-        ArrayList<String> lmao = graph.findRoute("11", "54");
-        System.out.println("RESULT: " + lmao);
+        List<String> endPath = graph.findRoute("69", "59");
+        System.out.println("RESULT: " + endPath);
     }
 
 }

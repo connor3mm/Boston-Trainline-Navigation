@@ -20,10 +20,6 @@ public class Station {
         return stationName;
     }
 
-//    public List<Neighbour> getNeighbouringStations() {
-//        return neighbouringStations;
-//    }
-
     public void setId(String id) {
         this.id = id;
     }
@@ -32,7 +28,4 @@ public class Station {
         this.stationName = stationName;
     }
 
-//    public void setNeighbouringStations(ArrayList<Neighbour> neighbouringStations) {
-//        this.neighbouringStations = neighbouringStations;
-//    }
 }
