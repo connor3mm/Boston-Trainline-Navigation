@@ -12,9 +12,13 @@ public class GraphImplementation implements GraphADT<Station, Neighbour> {
         stationToNeighbourMap = new HashMap<>();
     }
 
+    /**
+     * Return a list of neighbours for a given station
+     * @param station
+     * @return List of neighbours
+     */
     @Override
     public List<Neighbour> getNeighbouringNodes(Station station) {
-        //return a list of neighbours for a given station
         return stationToNeighbourMap.get(station);
     }
 
@@ -159,26 +163,29 @@ public class GraphImplementation implements GraphADT<Station, Neighbour> {
 
         int lineSwitchTotal = 0;
         String currentColour = null;
-        List<Neighbour> neighbourList;
 
 
-        for (int i = 0; i < endPath.size(); i++) {
+        for (int i = 0; i < endPath.size() - 1; i++) {
             Station station = getStationFromId(endPath.get(i));
             List<Neighbour> temp = getNeighbouringNodes(station);
 
             for (Neighbour neigh : temp) {
                 if (neigh.getPreviousStationID().equals(endPath.get(i + 1)) || neigh.getNextStationId().equals(endPath.get(i + 1))) {
                     String tempLineColour = neigh.getLineColour();
-                    if ((!currentColour.equals(tempLineColour)) && (currentColour != null)) {
+
+                    if ((currentColour != null) && (!currentColour.equals(tempLineColour))) {
                         lineSwitchTotal += 1;
+                        currentColour = tempLineColour;
+                        System.out.println(currentColour);
+                        break;
                     }
+
                     currentColour = tempLineColour;
                 }
             }
         }
 
-
-        return 0;
+        return lineSwitchTotal;
     }
 
 

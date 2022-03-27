@@ -5,7 +5,6 @@ import java.util.List;
 public class Station {
     private String id;
     private String stationName;
-//    private List<Neighbour> neighbouringStations;
 
     public Station(String id, String stationName) {
         this.id = id;
