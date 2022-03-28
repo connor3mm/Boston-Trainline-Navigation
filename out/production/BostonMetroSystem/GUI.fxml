@@ -14,11 +14,14 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="746.0" prefWidth="408.0" style="-fx-background-color: #f3f3f3;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="746.0" prefWidth="408.0" style="-fx-background-color: #f3f3f3;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+
+      fx:controller="MetroController"
+>
    <ImageView fitHeight="302.0" fitWidth="413.0" layoutX="-7.0" layoutY="-7.0" pickOnBounds="true">
       <Image url="@img/rail-g7333ad34f_1920.jpg" />
    </ImageView>
-   <Label layoutX="80.0" layoutY="14.0" text="Boston Trains" textFill="#27b245">
+   <Label fx:id="BostonTitle" layoutX="80.0" layoutY="14.0" text="Boston Trains" textFill="#27b245">
       <font>
          <Font name="Quicksand Bold" size="39.0" />
       </font>
@@ -42,14 +45,10 @@
          </Button>
          <MenuButton fx:id="departureOption" layoutY="35.0" mnemonicParsing="false" prefHeight="84.0" prefWidth="324.0" style="-fx-background-color: #FFF;">
            <items>
-             <MenuItem mnemonicParsing="false" text="Action 1" />
-             <MenuItem mnemonicParsing="false" text="Action 2" />
            </items>
          </MenuButton>
          <MenuButton fx:id="destinationOption" layoutY="133.0" mnemonicParsing="false" prefHeight="84.0" prefWidth="324.0" style="-fx-background-color: #FFF;">
             <items>
-               <MenuItem mnemonicParsing="false" text="Action 1" />
-               <MenuItem mnemonicParsing="false" text="Action 2" />
             </items>
          </MenuButton>
          <Label layoutX="14.0" layoutY="14.0" prefHeight="21.0" prefWidth="181.0" text="Departure Station" textFill="#19a144">

@@ -1,10 +1,11 @@
+import java.awt.*;
 import java.sql.SQLOutput;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class MetroModel {
-    public static GraphImplementation graph;
-
+    public static GraphImplementation graph = new GraphImplementation();
 
     public static void main(String[] args) {
         MetroModel model = new MetroModel();
@@ -36,6 +37,17 @@ public class MetroModel {
 
 
         graph.displayMap();
+    }
+
+    public List<String> getStationNames() {
+        List<Station> stationList = graph.getStations();
+        List<String> stationNames = new ArrayList<>();
+        
+        stationList.forEach(station -> {
+            stationNames.add(station.getStationName());
+        });
+        
+        return stationNames;
     }
 
 }

@@ -11,7 +11,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("GUI.fxml"));
         primaryStage.setTitle("MVC Example App");
-        primaryStage.setScene(new Scene(root, 500, 1000));
+        primaryStage.setScene(new Scene(root, 405, 755));
         primaryStage.show();
     }
 
