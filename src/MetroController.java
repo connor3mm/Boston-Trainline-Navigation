@@ -5,11 +5,12 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.event.EventHandler;
 
+import java.util.List;
+
 
 public class MetroController {
-
-    @FXML public MenuButton departureOption;
-    @FXML public MenuButton destinationOption;
+    @FXML public ComboBox departureOption;
+    @FXML public ComboBox destinationOption;
     @FXML public Button FindRouteButton;
     @FXML public TextArea routeResult;
     @FXML public Label BostonTitle;
@@ -17,20 +18,20 @@ public class MetroController {
     // model class
     MetroModel model = new MetroModel();
 
-
     public void initialize() {
-        FindRouteButton.setOnAction(event -> {
-        });
+        model.initializeGraph();
 
-        // add station names to menu
-        model.getStationNames().forEach(stationName -> {
-            departureOption.getItems().add(new MenuItem(stationName));
-            destinationOption.getItems().add(new MenuItem(stationName));
-        });
+        // add station names to dropdown menu
+        List<String> stationNames = model.getStationNames();
+        java.util.Collections.sort(stationNames);
+        departureOption.getItems().addAll(stationNames);
+        destinationOption.getItems().addAll(stationNames);
 
-        for (int i = 0; i < 5; i++) {
-            departureOption.getItems().add(new MenuItem(("hello")));
-        }
+        departureOption.setPromptText("e.g Arlington");
+        destinationOption.setPromptText("e.g AllstonStreet");
+
+        departureOption.setOnAction(evt -> { System.out.println(departureOption.getValue());});
+        destinationOption.setOnAction(evt -> { System.out.println(destinationOption.getValue());});
 
     }
 

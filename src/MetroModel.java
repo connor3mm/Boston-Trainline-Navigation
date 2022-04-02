@@ -9,13 +9,13 @@ public class MetroModel {
 
     public static void main(String[] args) {
         MetroModel model = new MetroModel();
-        model.initializeGraph();
         List<Station> stations = graph.getStations();
         List<Neighbour> s = graph.getNeighbouringNodes(stations.get(6));
         System.out.println(stations.get(6).getStationName());
         System.out.println(s.get(0).getLineColour());
         System.out.println(s.get(0).getPreviousStationID());
         System.out.println(s.get(0).getNextStationId());
+        System.out.println(model.getStationNames());
     }
 
     public void initializeGraph() {
@@ -30,11 +30,9 @@ public class MetroModel {
             graph.addStation(station);
         }
 
-
         for (Neighbour neighbour : neighbours) {
             graph.addEdge(neighbour);
         }
-
 
         graph.displayMap();
     }
@@ -42,12 +40,14 @@ public class MetroModel {
     public List<String> getStationNames() {
         List<Station> stationList = graph.getStations();
         List<String> stationNames = new ArrayList<>();
-        
+
         stationList.forEach(station -> {
             stationNames.add(station.getStationName());
         });
-        
+
         return stationNames;
     }
+
+
 
 }
