@@ -13,12 +13,17 @@ public class Main extends Application {
         primaryStage.setTitle("MVC Example App");
         primaryStage.setScene(new Scene(root, 405, 755));
         primaryStage.show();
+        System.out.println("yoooo");
+
+        MetroModel model = new MetroModel();
+        MetroView view = new MetroView();
+        MetroController controller = new MetroController(view,model);
+
     }
 
     public static void main(String[] args) throws Exception {
-        MetroView view = new MetroView();
-        MetroModel model = new MetroModel();
-        MetroController controller = new MetroController(view,model);
+
+
         launch(args);
     }
 }

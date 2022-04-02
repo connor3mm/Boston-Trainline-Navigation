@@ -1,15 +1,18 @@
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.event.EventHandler;
 import javafx.stage.Stage;
 
+import java.net.URL;
 import java.util.List;
+import java.util.ResourceBundle;
 
 
-public class MetroController {
+public class MetroController implements Initializable {
     private MetroModel model;
     private MetroView view;
 
@@ -18,7 +21,12 @@ public class MetroController {
         this.model = model;
 
         model.initializeGraph();
-        view.populateDropDown(model.getStationNames());
+
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        this.view.populateDropDown(model.getStationNames()); // this never gets accessed for some reason
     }
     // model class
 
