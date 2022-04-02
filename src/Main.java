@@ -15,7 +15,10 @@ public class Main extends Application {
         primaryStage.show();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
+        MetroView view = new MetroView();
+        MetroModel model = new MetroModel();
+        MetroController controller = new MetroController(view,model);
         launch(args);
     }
 }

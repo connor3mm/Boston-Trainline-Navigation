@@ -4,48 +4,46 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.event.EventHandler;
+import javafx.stage.Stage;
 
 import java.util.List;
 
 
 public class MetroController {
-    @FXML public ComboBox departureOption;
-    @FXML public ComboBox destinationOption;
-    @FXML public Button FindRouteButton;
-    @FXML public TextArea routeResult;
-    @FXML public Label BostonTitle;
+    private MetroModel model;
+    private MetroView view;
 
-    // model class
-    MetroModel model = new MetroModel();
+    public MetroController(MetroView view, MetroModel model) throws Exception {
+        this.view = view;
+        this.model = model;
 
-    public void initialize() {
         model.initializeGraph();
+        view.populateDropDown(model.getStationNames());
+    }
+    // model class
 
-        // add station names to dropdown menu
-        List<String> stationNames = model.getStationNames();
-        java.util.Collections.sort(stationNames);
-        departureOption.getItems().addAll(stationNames);
-        destinationOption.getItems().addAll(stationNames);
+//    public void initialize() {
+//        model.initializeGraph();
+//
+//        // add station names to dropdown menu
+//        List<String> stationNames = model.getStationNames();
+//        java.util.Collections.sort(stationNames);
+//        departureOption.getItems().addAll(stationNames);
+//        destinationOption.getItems().addAll(stationNames);
+//
+//        departureOption.setPromptText("e.g Arlington");
+//        destinationOption.setPromptText("e.g AllstonStreet");
+//
+//        departureOption.setOnAction(evt -> { System.out.println(departureOption.getValue());});
+//        destinationOption.setOnAction(evt -> { System.out.println(destinationOption.getValue());});
+//
+//        FindRouteButton.setOnAction(evt -> {
+//
+//
+//        });
 
-        departureOption.setPromptText("e.g Arlington");
-        destinationOption.setPromptText("e.g AllstonStreet");
-
-        departureOption.setOnAction(evt -> { System.out.println(departureOption.getValue());});
-        destinationOption.setOnAction(evt -> { System.out.println(destinationOption.getValue());});
 
     }
-
-
-
-
-
-
-//    FindRouteButton.addEventHandler(MouseEvent.MOUSE_CLICKED, handler);
-
-
-
-
-}
 
 
 

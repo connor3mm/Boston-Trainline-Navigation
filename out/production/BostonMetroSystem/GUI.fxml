@@ -13,7 +13,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="746.0" prefWidth="408.0" style="-fx-background-color: #f3f3f3;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MetroController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="746.0" prefWidth="408.0" style="-fx-background-color: #f3f3f3;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MetroView">
    <ImageView fitHeight="302.0" fitWidth="413.0" layoutX="-7.0" layoutY="-7.0" pickOnBounds="true">
       <Image url="@img/rail-g7333ad34f_1920.jpg" />
    </ImageView>
