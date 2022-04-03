@@ -46,8 +46,11 @@ public class MetroController {
                 alert.showAndWait();
             } else{
 
-                routeResult.setText(model.getStationNamesFromID());
+                routeResult.setText(model.convertToString(model.getStationNamesFromID(model
+                        .findPath(departureOption.getValue().toString(),destinationOption.getValue().toString()))));
 
+                routeResult.appendText("\n");
+                routeResult.appendText("Number of switched lines: " + model.numOfLineSwitches(model.findPath(departureOption.getValue().toString(),destinationOption.getValue().toString())));
             }
 
 
