@@ -44,8 +44,17 @@ public class MetroController {
                 alert.setTitle("Identical destination and departure");
                 alert.setContentText("Both destination and departure stations are identical." + "\n" + "Please choose different stations!");
                 alert.showAndWait();
+            } else{
+
+                routeResult.setText(model.getStationNamesFromID());
+
             }
+
+
+
         });
+
+
     }
 
 
