@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import java.lang.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
@@ -24,7 +25,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="746.0" prefWidth="408.0" style="-fx-background-color: #f3f3f3;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MetroController">
    <children>
-      <ImageView fitHeight="302.0" fitWidth="413.0" layoutX="-7.0" layoutY="-7.0" pickOnBounds="true" AnchorPane.leftAnchor="-7.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="-7.0">
+      <ImageView fitHeight="302.0" fitWidth="413.0" layoutX="-7.0" layoutY="-7.0" pickOnBounds="true" AnchorPane.leftAnchor="-7.0" AnchorPane.rightAnchor="413.0" AnchorPane.topAnchor="0.0">
          <image>
             <Image url="@img/rail-g7333ad34f_1920.jpg" />
          </image>
@@ -71,7 +72,7 @@
          </children>
       </AnchorPane>
       <Line endX="100.0" layoutX="218.0" layoutY="508.0" startX="-118.0" stroke="#196f0c" strokeWidth="0.5" AnchorPane.leftAnchor="99.5" AnchorPane.rightAnchor="89.5" />
-      <TextArea fx:id="routeResult" layoutX="15.0" layoutY="574.0" prefHeight="158.0" prefWidth="379.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="14.0" />
+      <TextArea fx:id="routeResult" layoutX="15.0" layoutY="574.0" prefHeight="158.0" prefWidth="379.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="574.0" />
       <Label layoutX="134.0" layoutY="541.0" text="Final Route(s)" textFill="#21b248" AnchorPane.leftAnchor="134.0" AnchorPane.rightAnchor="154.0">
          <font>
             <Font name="Quicksand Medium" size="20.0" />

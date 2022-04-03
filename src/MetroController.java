@@ -2,9 +2,15 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 import javafx.event.EventHandler;
+import javafx.scene.layout.AnchorPane;
 
+import javax.swing.text.html.ImageView;
+import java.awt.*;
 import java.util.List;
 
 
@@ -44,16 +50,15 @@ public class MetroController {
                 alert.setTitle("Identical destination and departure");
                 alert.setContentText("Both destination and departure stations are identical." + "\n" + "Please choose different stations!");
                 alert.showAndWait();
-            } else{
-
-                routeResult.setText(model.convertToString(model.getStationNamesFromID(model
-                        .findPath(departureOption.getValue().toString(),destinationOption.getValue().toString()))));
-
+            } else {
+                List<String> findPathValue = model.findPath(departureOption.getValue().toString(),destinationOption.getValue().toString());
+                List<String> stationNameFromID = model.getStationNamesFromID(findPathValue);
+                String resultToString = model.convertToString(stationNameFromID);
+                int numberOfLines = model.numOfLineSwitches(findPathValue);
+                routeResult.setText(resultToString);
                 routeResult.appendText("\n");
-                routeResult.appendText("Number of switched lines: " + model.numOfLineSwitches(model.findPath(departureOption.getValue().toString(),destinationOption.getValue().toString())));
+                routeResult.appendText("Number of switched lines: " + numberOfLines);
             }
-
-
 
         });
 
