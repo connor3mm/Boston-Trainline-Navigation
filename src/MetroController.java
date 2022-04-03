@@ -33,6 +33,19 @@ public class MetroController {
         departureOption.setOnAction(evt -> { System.out.println(departureOption.getValue());});
         destinationOption.setOnAction(evt -> { System.out.println(destinationOption.getValue());});
 
+        FindRouteButton.setOnAction(actionEvent -> {
+            if(departureOption.getValue()==null || destinationOption.getValue() == null){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Empty inputs");
+                alert.setContentText("Empty input!" + "\n" + "Please choose both a departure and destination option!");
+                alert.showAndWait();
+            } else if(departureOption.getValue() == destinationOption.getValue()){
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Identical destination and departure");
+                alert.setContentText("Both destination and departure stations are identical." + "\n" + "Please choose different stations!");
+                alert.showAndWait();
+            }
+        });
     }
 
 
