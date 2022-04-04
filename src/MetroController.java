@@ -1,16 +1,21 @@
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.event.EventHandler;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
-import javax.swing.text.html.ImageView;
 import java.awt.*;
+import java.io.IOException;
 import java.util.List;
 
 
@@ -20,6 +25,8 @@ public class MetroController {
     @FXML public Button FindRouteButton;
     @FXML public TextArea routeResult;
     @FXML public Label BostonTitle;
+    @FXML public Button ViewMapButton;
+    @FXML public ImageView ViewMapIcon;
 
     // model class
     MetroModel model = new MetroModel();
@@ -62,8 +69,28 @@ public class MetroController {
 
         });
 
-
+        ViewMapButton.setOnAction(evt -> { createNewStage(); });
+        ViewMapIcon.setOnMouseClicked(evt -> { createNewStage(); });
     }
+
+    public void createNewStage() {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("map.fxml"));
+        Scene newScene;
+        try {
+            newScene = new Scene(loader.load());
+        } catch (IOException ex) {
+            // TODO: handle error maybe????
+            return;
+        }
+
+        Stage mapStage = new Stage();
+        mapStage.setScene(newScene);
+        mapStage.setTitle("Boston Metro Digital Map");
+        mapStage.setResizable(false);
+//        mapStage.setFullScreen(true);
+        mapStage.showAndWait();
+    };
+
 
 
 

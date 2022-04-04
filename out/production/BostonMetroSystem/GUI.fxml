@@ -1,15 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import java.lang.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.paint.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
@@ -23,60 +13,85 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="746.0" prefWidth="408.0" style="-fx-background-color: #f3f3f3;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MetroController">
-   <children>
-      <ImageView fitHeight="302.0" fitWidth="413.0" layoutX="-7.0" layoutY="-7.0" pickOnBounds="true" AnchorPane.leftAnchor="-7.0" AnchorPane.rightAnchor="413.0" AnchorPane.topAnchor="0.0">
-         <image>
-            <Image url="@img/rail-g7333ad34f_1920.jpg" />
-         </image>
-      </ImageView>
-      <Label fx:id="BostonTitle" layoutX="80.0" layoutY="14.0" text="Boston Trains" textFill="#27b245" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="95.0">
-         <font>
-            <Font name="Quicksand Bold" size="39.0" />
-         </font>
-      </Label>
-      <AnchorPane layoutX="42.0" layoutY="169.0" prefHeight="280.0" prefWidth="324.0" style="-fx-background-color: #FFF; -fx-background-radius: 25; -fx-border-radius: 25;" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="42.0">
-         <effect>
+<Pane maxHeight="-Infinity" maxWidth="408.0" minHeight="-Infinity" minWidth="408.8" prefHeight="780.0"
+      prefWidth="408.0" style="-fx-background-color: #f3f3f3;" xmlns="http://javafx.com/javafx/17"
+      xmlns:fx="http://javafx.com/fxml/1" fx:controller="MetroController">
+    <ImageView fitHeight="304.0" fitWidth="418.0" layoutX="-7.0" layoutY="-7.0" pickOnBounds="true">
+        <Image url="@img/bg.jpg"/>
+    </ImageView>
+    <Label fx:id="BostonTitle" layoutX="80.0" layoutY="14.0" text="Boston Trains" textFill="#27b245">
+        <font>
+          <Font name="Quicksand Bold" size="39.0"/>
+        </font>
+    </Label>
+    <Pane layoutX="42.0" layoutY="176.0" prefHeight="387.0" prefWidth="329.0"
+          style="-fx-background-color: #FFF; -fx-background-radius: 25; -fx-border-radius: 25;">
+        <effect>
             <DropShadow blurType="ONE_PASS_BOX" height="18.03" radius="8.515" width="18.03">
-               <color>
-                  <Color blue="0.8815789222717285" green="0.8815789222717285" red="0.8815789222717285" />
-               </color>
+                <color>
+                    <Color red="0.8815789222717285" green="0.8815789222717285" blue="0.8815789222717285"/>
+                </color>
             </DropShadow>
-         </effect>
-         <children>
-            <Button fx:id="FindRouteButton" layoutY="217.0" mnemonicParsing="false" prefHeight="63.0" prefWidth="324.0" style="-fx-background-color: #22a55b; -fx-border-radius: 0 0 30 30; -fx-background-radius: 0 0 30 30;" text="  Search" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-               <font>
-                  <Font name="Quicksand Medium" size="28.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Label layoutX="14.0" layoutY="14.0" prefHeight="21.0" prefWidth="181.0" text="Departure Station" textFill="#19a144" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="129.0">
-               <font>
-                  <Font name="Quicksand Regular" size="16.0" />
-               </font>
-            </Label>
-            <Label layoutX="14.0" layoutY="119.0" prefHeight="21.0" prefWidth="181.0" text="Destination Station" textFill="#24b262" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="129.0">
-               <font>
-                  <Font name="Quicksand Regular" size="16.0" />
-               </font>
-            </Label>
-            <ImageView fitHeight="33.0" fitWidth="34.0" layoutX="88.0" layoutY="232.0" AnchorPane.leftAnchor="88.0" AnchorPane.rightAnchor="202.0">
-               <image>
-                  <Image url="img/magnifying-glass.png" />
-               </image>
-            </ImageView>
-            <ComboBox fx:id="destinationOption" layoutX="-1.0" layoutY="140.0" prefHeight="77.0" prefWidth="324.0" style="-fx-background-color: #FFF;" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="1.0" />
-            <ComboBox fx:id="departureOption" layoutY="35.0" prefHeight="77.0" prefWidth="324.0" style="-fx-background-color: #FFF;" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="1.0" />
-         </children>
-      </AnchorPane>
-      <Line endX="100.0" layoutX="218.0" layoutY="508.0" startX="-118.0" stroke="#196f0c" strokeWidth="0.5" AnchorPane.leftAnchor="99.5" AnchorPane.rightAnchor="89.5" />
-      <TextArea fx:id="routeResult" layoutX="15.0" layoutY="574.0" prefHeight="158.0" prefWidth="379.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="574.0" />
-      <Label layoutX="134.0" layoutY="541.0" text="Final Route(s)" textFill="#21b248" AnchorPane.leftAnchor="134.0" AnchorPane.rightAnchor="154.0">
-         <font>
-            <Font name="Quicksand Medium" size="20.0" />
-         </font>
-      </Label>
-   </children>
-</AnchorPane>
+        </effect>
+        <Button fx:id="FindRouteButton" layoutX="-1.0" layoutY="330.0" mnemonicParsing="false" prefHeight="58.0"
+                prefWidth="330.0"
+                style="-fx-background-color: #27b245; -fx-border-radius: 0 0 30 30; -fx-background-radius: 0 0 30 30;"
+                text="  Search" textFill="WHITE">
+            <font>
+                <Font name="Quicksand Medium" size="28.0"/>
+            </font>
+            <cursor>
+                <Cursor fx:constant="HAND"/>
+            </cursor>
+        </Button>
+        <Label layoutX="14.0" layoutY="14.0" prefHeight="21.0" prefWidth="181.0" text="Departure Station"
+               textFill="#19a144">
+            <font>
+                <Font name="Quicksand Regular" size="16.0"/>
+            </font>
+        </Label>
+        <Label layoutX="23.0" layoutY="119.0" prefHeight="21.0" prefWidth="181.0" text="Destination Station"
+               textFill="#24b262">
+            <font>
+                <Font name="Quicksand Regular" size="16.0"/>
+            </font>
+        </Label>
+        <ImageView fitHeight="33.0" fitWidth="34.0" layoutX="88.0" layoutY="232.0">
+            <!--               <Image url="img/magnifying-glass.png"/>-->
+        </ImageView>
+        <ComboBox fx:id="destinationOption" layoutX="14.0" layoutY="140.0" prefHeight="77.0" prefWidth="301.0"
+                  style="-fx-background-color: #FFF;"/>
+        <ComboBox fx:id="departureOption" layoutX="15.0" layoutY="35.0" prefHeight="77.0" prefWidth="301.0"
+                  style="-fx-background-color: #FFF;"/>
+        <Label layoutX="81.0" layoutY="232.0" text="Click to view full map" textFill="#26ab33">
+            <font>
+                <Font name="Quicksand Regular" size="17.0"/>
+            </font>
+        </Label>
+        <Line endX="157.0" layoutX="171.0" layoutY="217.0" startX="-172.0" stroke="#bfbfbf" strokeWidth="0.5"/>
+        <Button fx:id="ViewMapButton" layoutX="133.0" layoutY="259.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="65.0"
+                style="-fx-background-color: #FFF; -fx-background-radius: 30;">
+            <effect>
+                <DropShadow>
+                    <color>
+                        <Color red="0.5526315569877625" green="0.5526315569877625" blue="0.5526315569877625"/>
+                    </color>
+                </DropShadow>
+            </effect>
+        </Button>
+        <ImageView fx:id="ViewMapIcon" fitHeight="26.0" fitWidth="34.0" layoutX="147.0" layoutY="275.0">
+            <Image url="@img/map.png"/>
+        </ImageView>
+        <Line endX="157.0" layoutX="171.0" layoutY="112.0" startX="-172.0" stroke="#bfbfbf" strokeWidth="0.5"/>
+        <ImageView fitHeight="33.0" fitWidth="34.0" layoutX="88.0" layoutY="342.0">
+            <Image url="@img/magnifying-glass.png"/>
+        </ImageView>
+    </Pane>
+    <TextArea fx:id="routeResult" layoutX="15.0" layoutY="619.0" prefHeight="152.0" prefWidth="379.0"/>
+    <Label layoutX="141.0" layoutY="587.0" text="Final Route(s)" textFill="#21b248">
+        <font>
+          <Font name="Quicksand Medium" size="20.0"/>
+        </font>
+    </Label>
+    <Label text="Label"/>
+</Pane>
