@@ -41,18 +41,20 @@ public class MetroModel {
 
         //Test for dfs search TO BE REMOVED
         System.out.println("===================================================");
-        List<List<String>> endPath = graph.findRoute("0", "30");  // ("0", "30") doesn't work cause 0 is starting destination
-        for(List<String> path : endPath){
+        List<List<String>> endPath = graph.findRoute("26", "29");  // ("0", "30") doesn't work cause 0 is starting destination
+        for (List<String> path : endPath) {
             System.out.println("RESULT: " + path);
         }
 
+        System.out.println("****************************************************");
+        System.out.println(bestLinePath(endPath));
+
         //int lineSwitches = graph.calculateLineSwitching(endPath);
-       // System.out.println("Line Switches " + lineSwitches);
+        // System.out.println("Line Switches " + lineSwitches);
         System.out.println("****************************************************");
         //System.out.println(getStationNamesFromID(endPath));
         //System.out.println(convertToString(getStationNamesFromID(endPath)));
     }
-
 
 
     public List<String> getStationNames() {
@@ -66,37 +68,37 @@ public class MetroModel {
         return stationNames;
     }
 
-    public List<String> getStationNamesFromID(List<String> path){
+    public List<String> getStationNamesFromID(List<String> path) {
         List<String> stationNames = new ArrayList<>();
         List<Station> stationList = graph.getStations();
 
-        for (int i=0; i< path.size();i++){
+        for (int i = 0; i < path.size(); i++) {
             stationNames.add(stationList.get(Integer.parseInt(path.get(i))).getStationName());//getting the name of the stations
         }
 
         return stationNames;
     }
 
-    public String convertToString(List<String> names){
+    public String convertToString(List<String> names) {
         String string = names.get(0).trim();
         string = string + " > ";
 
-        for (int i=1; i<names.size();i++){
+        for (int i = 1; i < names.size(); i++) {
             string = string + names.get(i).trim();
 
-            if(i != names.size()-1) {
+            if (i != names.size() - 1) {
                 string += " > ";
             }
         }
         return string;
     }
 
-    public String getIdOFStationFromList(String station){
+    public String getIdOFStationFromList(String station) {
         List<Station> stationList = graph.getStations();
         String id = "";
 
-        for (int i=0; i< stationList.size();i++){
-            if(stationList.get(i).getStationName() == station){
+        for (int i = 0; i < stationList.size(); i++) {
+            if (stationList.get(i).getStationName() == station) {
                 id = stationList.get(i).getId();
             }
         }
@@ -104,7 +106,7 @@ public class MetroModel {
         return id;
     }
 
-    public List<List<String>> findPath(String start, String end){
+    public List<List<String>> findPath(String start, String end) {
         List<Station> stationList = graph.getStations();
 
         start = getIdOFStationFromList(start);
@@ -116,9 +118,29 @@ public class MetroModel {
     }
 
 
-    public int numOfLineSwitches(List<String> endPath){
-        int lineSwitching = graph.calculateLineSwitching(endPath);
-        return lineSwitching;
+//    public int numOfLineSwitches(List<String> endPath) {
+//        int lineSwitching = graph.calculateLineSwitching(endPath);
+//        return lineSwitching;
+//    }
+
+
+    public List<List<String>> bestLinePath(List<List<String>> paths) {
+        int bestLine = 1000;
+        List<List<String>> bestPaths = new ArrayList<>();
+
+        for (List<String> path : paths) {
+            int lines = 0;
+            lines = graph.calculateLineSwitching(path);
+
+            if (lines <= bestLine) {
+                bestLine = lines;
+                bestPaths.add(path);
+            }
+
+        }
+
+
+        return bestPaths;
     }
 
 }

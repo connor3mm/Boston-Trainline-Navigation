@@ -52,6 +52,8 @@ public class MetroController {
                 alert.showAndWait();
             } else {
 //                List<String> findPathValue = model.findPath(departureOption.getValue().toString(),destinationOption.getValue().toString());
+
+
 //                List<String> stationNameFromID = model.getStationNamesFromID(findPathValue);
 //                String resultToString = model.convertToString(stationNameFromID);
 //                int numberOfLines = model.numOfLineSwitches(findPathValue);
