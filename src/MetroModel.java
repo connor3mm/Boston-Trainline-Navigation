@@ -118,10 +118,10 @@ public class MetroModel {
     }
 
 
-//    public int numOfLineSwitches(List<String> endPath) {
-//        int lineSwitching = graph.calculateLineSwitching(endPath);
-//        return lineSwitching;
-//    }
+    public int numOfLineSwitches(List<String> endPath) {
+        int lineSwitching = graph.calculateLineSwitching(endPath);
+        return lineSwitching;
+    }
 
 
     public List<List<String>> bestLinePath(List<List<String>> paths) {
@@ -138,7 +138,6 @@ public class MetroModel {
             }
 
         }
-
 
         return bestPaths;
     }

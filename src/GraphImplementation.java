@@ -85,7 +85,6 @@ public class GraphImplementation implements GraphADT<Station, Neighbour> {
 
         int max = 1000;
 
-
         stationsIDs.add(startStation);
         agenda.add(stationsIDs);
 
@@ -96,7 +95,6 @@ public class GraphImplementation implements GraphADT<Station, Neighbour> {
             if (visited.contains(currentNode)) {
                 continue;
             }
-
 
             //Getting the last element of the current path and check if it is the end station then return the path
 

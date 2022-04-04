@@ -11,6 +11,7 @@ import javafx.scene.layout.AnchorPane;
 
 import javax.swing.text.html.ImageView;
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -51,15 +52,19 @@ public class MetroController {
                 alert.setContentText("Both destination and departure stations are identical." + "\n" + "Please choose different stations!");
                 alert.showAndWait();
             } else {
-//                List<String> findPathValue = model.findPath(departureOption.getValue().toString(),destinationOption.getValue().toString());
+                List<List<String>> findPathValue = model.findPath(departureOption.getValue().toString(),destinationOption.getValue().toString());
+                List<String> stationNameFromID = new ArrayList<>();
+                List<List<String>> bestPath = model.bestLinePath(findPathValue);
+                for(List<String> listPath: bestPath) {
+                    stationNameFromID = model.getStationNamesFromID(listPath);
+                    String resultToString = model.convertToString(stationNameFromID);
+                    int numberOfLines = model.numOfLineSwitches(listPath);
+                    routeResult.setText(resultToString);
+                    routeResult.appendText("\n");
+                    routeResult.appendText("Number of switched lines: " + numberOfLines);
+                    routeResult.appendText("\n");
+                }
 
-
-//                List<String> stationNameFromID = model.getStationNamesFromID(findPathValue);
-//                String resultToString = model.convertToString(stationNameFromID);
-//                int numberOfLines = model.numOfLineSwitches(findPathValue);
-//                routeResult.setText(resultToString);
-//                routeResult.appendText("\n");
-//                routeResult.appendText("Number of switched lines: " + numberOfLines);
             }
 
         });
