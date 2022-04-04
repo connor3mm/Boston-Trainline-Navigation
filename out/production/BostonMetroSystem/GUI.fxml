@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
@@ -12,86 +21,86 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-      prefWidth="408.0" style="-fx-background-color: #f3f3f3;" xmlns="http://javafx.com/javafx/17"
-      xmlns:fx="http://javafx.com/fxml/1" fx:controller="MetroController">
-    <ImageView fitHeight="304.0" fitWidth="418.0" layoutX="-7.0" layoutY="-7.0" pickOnBounds="true">
-        <Image url="@img/bg.jpg"/>
-    </ImageView>
-    <Label fx:id="BostonTitle" layoutX="80.0" layoutY="14.0" text="Boston Trains" textFill="#27b245">
-        <font>
-          <Font name="Quicksand Bold" size="39.0"/>
-        </font>
-    </Label>
-    <Pane layoutX="42.0" layoutY="176.0" prefHeight="387.0" prefWidth="329.0"
-          style="-fx-background-color: #FFF; -fx-background-radius: 25; -fx-border-radius: 25;">
-        <effect>
-            <DropShadow blurType="ONE_PASS_BOX" height="18.03" radius="8.515" width="18.03">
-                <color>
-                    <Color red="0.8815789222717285" green="0.8815789222717285" blue="0.8815789222717285"/>
-                </color>
-            </DropShadow>
-        </effect>
-        <Button fx:id="FindRouteButton" layoutX="-1.0" layoutY="330.0" mnemonicParsing="false" prefHeight="58.0"
-                prefWidth="330.0"
-                style="-fx-background-color: #27b245; -fx-border-radius: 0 0 30 30; -fx-background-radius: 0 0 30 30;"
-                text="  Search" textFill="WHITE">
-            <font>
-                <Font name="Quicksand Medium" size="28.0"/>
-            </font>
-            <cursor>
-                <Cursor fx:constant="HAND"/>
-            </cursor>
-        </Button>
-        <Label layoutX="14.0" layoutY="14.0" prefHeight="21.0" prefWidth="181.0" text="Departure Station"
-               textFill="#19a144">
-            <font>
-                <Font name="Quicksand Regular" size="16.0"/>
-            </font>
-        </Label>
-        <Label layoutX="23.0" layoutY="119.0" prefHeight="21.0" prefWidth="181.0" text="Destination Station"
-               textFill="#24b262">
-            <font>
-                <Font name="Quicksand Regular" size="16.0"/>
-            </font>
-        </Label>
-        <ImageView fitHeight="33.0" fitWidth="34.0" layoutX="88.0" layoutY="232.0">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="408.0" style="-fx-background-color: #f3f3f3;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MetroController">
+   <children>
+       <ImageView fitHeight="304.0" fitWidth="418.0" layoutX="-7.0" layoutY="-7.0" pickOnBounds="true" AnchorPane.leftAnchor="-7.0" AnchorPane.rightAnchor="-3.0">
+          <image>
+              <Image url="@img/bg.jpg" />
+          </image>
+       </ImageView>
+       <Label fx:id="BostonTitle" layoutX="80.0" layoutY="14.0" text="Boston Trains" textFill="#27b245" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="95.0">
+           <font>
+             <Font name="Quicksand Bold" size="39.0" />
+           </font>
+       </Label>
+       <AnchorPane layoutX="42.0" layoutY="176.0" prefHeight="387.0" prefWidth="329.0" style="-fx-background-color: #FFF; -fx-background-radius: 25; -fx-border-radius: 25;" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="37.0">
+           <effect>
+               <DropShadow blurType="ONE_PASS_BOX" height="18.03" radius="8.515" width="18.03">
+                   <color>
+                       <Color blue="0.8815789222717285" green="0.8815789222717285" red="0.8815789222717285" />
+                   </color>
+               </DropShadow>
+           </effect>
+          <children>
+              <Button fx:id="FindRouteButton" layoutX="-1.0" layoutY="330.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="330.0" style="-fx-background-color: #27b245; -fx-border-radius: 0 0 30 30; -fx-background-radius: 0 0 30 30;" text="  Search" textFill="WHITE" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="0.0">
+                  <font>
+                      <Font name="Quicksand Medium" size="28.0" />
+                  </font>
+                  <cursor>
+                      <Cursor fx:constant="HAND" />
+                  </cursor>
+              </Button>
+              <Label layoutX="14.0" layoutY="14.0" prefHeight="21.0" prefWidth="181.0" text="Departure Station" textFill="#19a144" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="134.0">
+                  <font>
+                      <Font name="Quicksand Regular" size="16.0" />
+                  </font>
+              </Label>
+              <Label layoutX="23.0" layoutY="119.0" prefHeight="21.0" prefWidth="181.0" text="Destination Station" textFill="#24b262" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="134.0">
+                  <font>
+                      <Font name="Quicksand Regular" size="16.0" />
+                  </font>
+              </Label>
+              <ImageView fitHeight="33.0" fitWidth="34.0" layoutX="88.0" layoutY="232.0" AnchorPane.leftAnchor="88.0" AnchorPane.rightAnchor="207.0">
             <!--               <Image url="img/magnifying-glass.png"/>-->
         </ImageView>
-        <ComboBox fx:id="destinationOption" layoutX="14.0" layoutY="140.0" prefHeight="77.0" prefWidth="301.0"
-                  style="-fx-background-color: #FFF;"/>
-        <ComboBox fx:id="departureOption" layoutX="15.0" layoutY="35.0" prefHeight="77.0" prefWidth="301.0"
-                  style="-fx-background-color: #FFF;"/>
-        <Label layoutX="81.0" layoutY="232.0" text="Click to view full map" textFill="#26ab33">
-            <font>
-                <Font name="Quicksand Regular" size="17.0"/>
-            </font>
-        </Label>
-        <Line endX="157.0" layoutX="171.0" layoutY="217.0" startX="-172.0" stroke="#bfbfbf" strokeWidth="0.5"/>
-        <Button fx:id="ViewMapButton" layoutX="133.0" layoutY="259.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="65.0"
-                style="-fx-background-color: #FFF; -fx-background-radius: 30;">
-            <effect>
-                <DropShadow>
-                    <color>
-                        <Color red="0.5526315569877625" green="0.5526315569877625" blue="0.5526315569877625"/>
-                    </color>
-                </DropShadow>
-            </effect>
-        </Button>
-        <ImageView fx:id="ViewMapIcon" fitHeight="26.0" fitWidth="34.0" layoutX="147.0" layoutY="275.0">
-            <Image url="@img/map.png"/>
-        </ImageView>
-        <Line endX="157.0" layoutX="171.0" layoutY="112.0" startX="-172.0" stroke="#bfbfbf" strokeWidth="0.5"/>
-        <ImageView fitHeight="33.0" fitWidth="34.0" layoutX="88.0" layoutY="342.0">
-            <Image url="@img/magnifying-glass.png"/>
-        </ImageView>
-    </Pane>
-    <TextArea fx:id="routeResult" layoutX="15.0" layoutY="619.0" prefHeight="152.0" prefWidth="379.0"/>
-    <Label layoutX="141.0" layoutY="587.0" text="Final Route(s)" textFill="#21b248">
-        <font>
-          <Font name="Quicksand Medium" size="20.0"/>
-        </font>
-    </Label>
-    <Label text="Label"/>
-</Pane>
+              <ComboBox fx:id="destinationOption" layoutX="14.0" layoutY="140.0" prefHeight="77.0" prefWidth="301.0" style="-fx-background-color: #FFF;" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+              <ComboBox fx:id="departureOption" layoutX="15.0" layoutY="35.0" prefHeight="77.0" prefWidth="301.0" style="-fx-background-color: #FFF;" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+              <Label layoutX="81.0" layoutY="232.0" text="Click to view full map" textFill="#26ab33" AnchorPane.leftAnchor="81.0" AnchorPane.rightAnchor="88.0">
+                  <font>
+                      <Font name="Quicksand Regular" size="17.0" />
+                  </font>
+              </Label>
+              <Line endX="157.0" layoutX="171.0" layoutY="217.0" startX="-172.0" stroke="#bfbfbf" strokeWidth="0.5" AnchorPane.leftAnchor="-1.5" AnchorPane.rightAnchor="0.5" />
+              <Button fx:id="ViewMapButton" layoutX="133.0" layoutY="259.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="65.0" style="-fx-background-color: #FFF; -fx-background-radius: 30;" AnchorPane.leftAnchor="133.0" AnchorPane.rightAnchor="131.0">
+                  <effect>
+                      <DropShadow>
+                          <color>
+                              <Color blue="0.5526315569877625" green="0.5526315569877625" red="0.5526315569877625" />
+                          </color>
+                      </DropShadow>
+                  </effect>
+              </Button>
+              <ImageView fx:id="ViewMapIcon" fitHeight="26.0" fitWidth="34.0" layoutX="147.0" layoutY="275.0" AnchorPane.leftAnchor="147.0" AnchorPane.rightAnchor="148.0">
+                 <image>
+                     <Image url="@img/map.png" />
+                 </image>
+              </ImageView>
+              <Line endX="157.0" layoutX="171.0" layoutY="112.0" startX="-172.0" stroke="#bfbfbf" strokeWidth="0.5" AnchorPane.leftAnchor="-1.5" AnchorPane.rightAnchor="0.5" />
+              <ImageView fitHeight="33.0" fitWidth="34.0" layoutX="88.0" layoutY="342.0" AnchorPane.leftAnchor="88.0" AnchorPane.rightAnchor="207.0">
+                 <image>
+                     <Image url="@img/magnifying-glass.png" />
+                 </image>
+              </ImageView>
+          </children>
+       </AnchorPane>
+       <TextArea fx:id="routeResult" layoutX="15.0" layoutY="619.0" prefHeight="152.0" prefWidth="379.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="14.0" />
+       <Label layoutX="141.0" layoutY="587.0" text="Final Route(s)" textFill="#21b248" AnchorPane.leftAnchor="141.0" AnchorPane.rightAnchor="147.0">
+           <font>
+             <Font name="Quicksand Medium" size="20.0" />
+           </font>
+       </Label>
+       <Label text="Label" AnchorPane.leftAnchor="141.0" AnchorPane.rightAnchor="147.0" />
+   </children>
+</AnchorPane>

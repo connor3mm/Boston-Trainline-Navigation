@@ -75,6 +75,7 @@ public class GraphImplementation implements GraphADT<Station, Neighbour> {
      */
     public List<List<String>> findRoute(String startStation, String endStation) {
         List<String> visited = new ArrayList<>();
+        visited.add(startStation);
         Queue<List<String>> agenda = new LinkedList<>();
         ArrayList<String> stationsIDs = new ArrayList<>();
 
@@ -92,9 +93,9 @@ public class GraphImplementation implements GraphADT<Station, Neighbour> {
             currentNodePath = agenda.poll();
             currentNode = currentNodePath.get(currentNodePath.size() - 1);
 
-            if (visited.contains(currentNode)) {
-                continue;
-            }
+//            if (!visited.contains(currentNode)) {
+//                visited.add(currentNode);
+//            }
 
             //Getting the last element of the current path and check if it is the end station then return the path
 
@@ -110,8 +111,6 @@ public class GraphImplementation implements GraphADT<Station, Neighbour> {
                 //return currentNodePath;
             }
 
-            visited.add(currentNode);
-
             //Get neighbours of current station
             ArrayList<String> agendaList = extendPath(currentNode);
 
@@ -121,9 +120,10 @@ public class GraphImplementation implements GraphADT<Station, Neighbour> {
             for (String neigh : agendaList) {
                 ArrayList<String> tempList = new ArrayList<>(currentNodePath);
 
-                tempList.add(neigh);
-                finalOutput.add(tempList);
-
+                if(!currentNodePath.contains(neigh)) {
+                    tempList.add(neigh);
+                    finalOutput.add(tempList);
+                }
             }
             agenda.addAll(finalOutput);
         }
