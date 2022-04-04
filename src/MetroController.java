@@ -1,20 +1,13 @@
-import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
-import javafx.event.EventHandler;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -53,45 +46,52 @@ public class MetroController {
 
         FindRouteButton.setOnAction(actionEvent -> {
             if(departureOption.getValue()==null || destinationOption.getValue() == null){
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Empty inputs");
-                alert.setContentText("Empty input!" + "\n" + "Please choose both a departure and destination option!");
-                alert.showAndWait();
+                validationCheck(Alert.AlertType.ERROR, "Empty inputs", "Empty input!", "Please choose both a departure and destination option!");
             } else if(departureOption.getValue() == destinationOption.getValue()){
-                Alert alert = new Alert(Alert.AlertType.WARNING);
-                alert.setTitle("Identical destination and departure");
-                alert.setContentText("Both destination and departure stations are identical." + "\n" + "Please choose different stations!");
-                alert.showAndWait();
+                validationCheck(Alert.AlertType.WARNING, "Identical destination and departure", "Both destination and departure stations are identical.", "Please choose different stations!");
             } else {
-                List<List<String>> findPathValue = model.findPath(departureOption.getValue().toString(),destinationOption.getValue().toString());
-                List<String> stationNameFromID = new ArrayList<>();
-                List<List<String>> bestRoutePath = model.bestLinePath(findPathValue);
-                routeResult.setText("");
-                for(List<String> path : bestRoutePath) {
-                    stationNameFromID = model.getStationNamesFromID(path);
-                    String resultToString = model.convertToString(stationNameFromID);
-
-                    int numberOfLines = model.numOfLineSwitches(path);
-                    int countStops = 0;
-
-                    for(int i = 1; i < path.size()-1; i++) {
-                        countStops++;
-                    }
-
-                    routeResult.appendText("From station " + departureOption.getValue().toString().trim() + " you have to travel " + countStops + " station to get to station " + destinationOption.getValue().toString().trim());
-                    routeResult.appendText("\n");
-                    routeResult.appendText("Take the route");
-                    routeResult.appendText("\n");
-                    routeResult.appendText(resultToString);
-                    routeResult.appendText("\n");
-                    routeResult.appendText("Number of line switches for the route: " + numberOfLines);
-                    routeResult.appendText("\n\n");
-                }
+                displayTextOutput();
             }
         });
 
         ViewMapButton.setOnAction(evt -> { createNewStage(); });
         ViewMapIcon.setOnMouseClicked(evt -> { createNewStage(); });
+    }
+
+    private void displayTextOutput() {
+        List<List<String>> findPathValue = model.findPath(departureOption.getValue().toString(),destinationOption.getValue().toString());
+        List<List<String>> bestRoutePath = model.bestLinePath(findPathValue);
+        List<String> stationNameFromID;
+
+        routeResult.setText("");
+
+        for(List<String> path : bestRoutePath) {
+            stationNameFromID = model.getStationNamesFromID(path);
+            String resultToString = model.convertToString(stationNameFromID);
+
+            int numberOfLines = model.numOfLineSwitches(path);
+            int countStops = 0;
+
+            for(int i = 1; i < path.size()-1; i++) {
+                countStops++;
+            }
+
+            routeResult.appendText("From station " + departureOption.getValue().toString().trim() + " you have to travel " + countStops + " station to get to station " + destinationOption.getValue().toString().trim());
+            routeResult.appendText("\n");
+            routeResult.appendText("Take the route");
+            routeResult.appendText("\n");
+            routeResult.appendText(resultToString);
+            routeResult.appendText("\n");
+            routeResult.appendText("Number of line switches for the route: " + numberOfLines);
+            routeResult.appendText("\n\n");
+        }
+    }
+
+    private void validationCheck(Alert.AlertType error, String Empty_inputs, String x, String x1) {
+        Alert alert = new Alert(error);
+        alert.setTitle(Empty_inputs);
+        alert.setContentText(x + "\n" + x1);
+        alert.showAndWait();
     }
 
     public void createNewStage() {
@@ -108,20 +108,6 @@ public class MetroController {
         mapStage.setScene(newScene);
         mapStage.setTitle("Boston Metro Digital Map");
         mapStage.setResizable(false);
-//        mapStage.setFullScreen(true);
         mapStage.showAndWait();
     };
-
-
-
-
-
-
-
-//    FindRouteButton.addEventHandler(MouseEvent.MOUSE_CLICKED, handler);
-
-
-
-
 }
-

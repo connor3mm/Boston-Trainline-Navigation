@@ -2,22 +2,20 @@ import java.util.*;
 
 public class GraphImplementation implements GraphADT<Station, Neighbour> {
 
+    //Variables
     private List<Station> stations;
     private List<Neighbour> edges;
     private Map<Station, List<Neighbour>> stationToNeighbourMap;
 
+    //Constructor
     public GraphImplementation() {
         stations = new ArrayList<>();
         edges = new ArrayList<>();
         stationToNeighbourMap = new HashMap<>();
     }
 
-    /**
-     * Return a list of neighbours for a given station
-     *
-     * @param station
-     * @return List of neighbours
-     */
+
+    //Getters
     @Override
     public List<Neighbour> getNeighbouringNodes(Station station) {
         return stationToNeighbourMap.get(station);
@@ -27,11 +25,11 @@ public class GraphImplementation implements GraphADT<Station, Neighbour> {
         return this.stations;
     }
 
-    public List<Neighbour> getEdges() {
-        return this.edges;
-    }
 
-
+    /**
+     * Add stations to map.
+     * @param station
+     */
     @Override
     public void addStation(Station station) {
         stations.add(station);
@@ -39,6 +37,7 @@ public class GraphImplementation implements GraphADT<Station, Neighbour> {
             stationToNeighbourMap.put(station, new ArrayList<>());
         }
     }
+
 
     /**
      * adding neighbour to edges list, then adding everything to stations to neighbour map
@@ -52,6 +51,9 @@ public class GraphImplementation implements GraphADT<Station, Neighbour> {
     }
 
 
+    /**
+     * For Testing, displays map to terminal
+     */
     public void displayMap() {
         for (Map.Entry<Station, List<Neighbour>> entry : stationToNeighbourMap.entrySet()) {
             System.out.println("-----------------------------------");
@@ -67,25 +69,24 @@ public class GraphImplementation implements GraphADT<Station, Neighbour> {
         }
     }
 
+
     /**
      * Takes start and end station, finds the shortest path using Breadth first search
      *
      * @param startStation
      * @param endStation
-     * @return Final array of the path from start station to end
+     * @return Final array of the path(s) from start station to end
      */
     public List<List<String>> findRoute(String startStation, String endStation) {
-        List<List<String>> visited = new ArrayList<>();
-
         Queue<List<String>> agenda = new LinkedList<>();
         ArrayList<String> stationsIDs = new ArrayList<>();
-
+        List<List<String>> visited = new ArrayList<>();
         List<List<String>> output = new ArrayList<>();
 
         List<String> currentNodePath;
         String currentNode;
-
         int max = 1000;
+
 
         stationsIDs.add(startStation);
         agenda.add(stationsIDs);
@@ -98,53 +99,68 @@ public class GraphImplementation implements GraphADT<Station, Neighbour> {
                 continue;
             }
 
-            //Getting the last element of the current path and check if it is the end station then return the path
-
             if (currentNodePath.size() > max) {
                 continue;
             }
 
+            //If end station is found, add to the output list and set new max with path length
             if (currentNodePath.contains(endStation)) {
-
                 max = currentNodePath.size();
                 output.add(currentNodePath);
                 continue;
-                //return currentNodePath;
             }
 
             visited.add(currentNodePath);
 
             //Get neighbours of current station
-            ArrayList<String> agendaList = extendPath(currentNode);
+            ArrayList<String> nextStates = extendPath(currentNode);
 
-            ArrayList<ArrayList<String>> finalOutput = new ArrayList<>();
+            ArrayList<ArrayList<String>> tempOutput = new ArrayList<>();
 
-            //For every neighbour of current node, create new array and append neighbour, if neigh is not in visited list
-            for (String neigh : agendaList) {
+            //For every neighbour of current node, create new array and append neighbour, if neighbour is not in current path list.
+            for (String neighbour : nextStates) {
                 ArrayList<String> tempList = new ArrayList<>(currentNodePath);
 
-                if (!currentNodePath.contains(neigh)) {
-                    tempList.add(neigh);
-                    finalOutput.add(tempList);
+                if (!currentNodePath.contains(neighbour)) {
+                    tempList.add(neighbour);
+                    tempOutput.add(tempList);
                 }
             }
-            agenda.addAll(finalOutput);
+            agenda.addAll(tempOutput);
         }
 
-        List<List<String>> output2 = new ArrayList<>();
+        //Finds the best path(s) that has the minimal stops.
+        List<List<String>> allPaths = getMinPath(output, max);
 
-        for (List<String> path : output) {
-            if (path.size() == max) {
-                if (!output2.contains(path))
-                    output2.add(path);
-            }
-        }
-
-
-        return output2;
+        return allPaths;
     }
 
 
+    /**
+     * Finds minimal path from given list.
+     * @param output
+     * @param max
+     * @return allPaths
+     */
+    private List<List<String>> getMinPath(List<List<String>> output, int max) {
+        List<List<String>> allPaths = new ArrayList<>();
+
+        for (List<String> path : output) {
+            if (path.size() == max) {
+                if (!allPaths.contains(path))
+                    allPaths.add(path);
+            }
+        }
+        return allPaths;
+    }
+
+
+    /**
+     * Gets the station from its ID
+     *
+     * @param id
+     * @return Station with passed in ID
+     */
     public Station getStationFromId(String id) {
         for (Station currentStation : this.stations) {
             if (currentStation.getId().equals(id)) {
@@ -154,8 +170,9 @@ public class GraphImplementation implements GraphADT<Station, Neighbour> {
         return null;
     }
 
+
     /**
-     * finds the neighbours of current node.
+     * Finds the neighbours of current node
      *
      * @param currentPathNode
      * @return Arraylist of neighbours
@@ -181,7 +198,7 @@ public class GraphImplementation implements GraphADT<Station, Neighbour> {
      * Calculates how many line switches between start node and end node
      *
      * @param endPath
-     * @return integer of line switches
+     * @return The number of line switches
      */
     public int calculateLineSwitching(List<String> endPath) {
 
@@ -208,9 +225,7 @@ public class GraphImplementation implements GraphADT<Station, Neighbour> {
                 }
             }
         }
-
         return lineSwitchTotal;
     }
-
 
 }

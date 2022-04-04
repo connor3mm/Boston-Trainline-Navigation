@@ -80,18 +80,19 @@ public class MetroModel {
     }
 
     public String convertToString(List<String> names) {
-        String string = names.get(0).trim();
-        string = string + " > ";
+        StringBuilder string = new StringBuilder(names.get(0).trim());
+        string.append(" > ");
 
         for (int i = 1; i < names.size(); i++) {
-            string = string + names.get(i).trim();
+            string.append(names.get(i).trim());
 
             if (i != names.size() - 1) {
-                string += " > ";
+                string.append(" > ");
             }
         }
-        return string;
+        return string.toString();
     }
+
 
     public String getIdOFStationFromList(String station) {
         List<Station> stationList = graph.getStations();
@@ -107,26 +108,21 @@ public class MetroModel {
     }
 
     public List<List<String>> findPath(String start, String end) {
-        List<Station> stationList = graph.getStations();
-
         start = getIdOFStationFromList(start);
         end = getIdOFStationFromList(end);
 
-        List<List<String>> endPath = graph.findRoute(start, end);
-
-        return endPath;
+        return graph.findRoute(start, end);
     }
 
 
     public int numOfLineSwitches(List<String> endPath) {
-        int lineSwitching = graph.calculateLineSwitching(endPath);
-        return lineSwitching;
+        return graph.calculateLineSwitching(endPath);
     }
 
 
     public List<List<String>> bestLinePath(List<List<String>> paths) {
-        int bestLine = 1000;
         List<List<String>> bestPaths = new ArrayList<>();
+        int bestLine = 1000;
 
         for (List<String> path : paths) {
             int lines = 0;
@@ -136,7 +132,6 @@ public class MetroModel {
                 bestLine = lines;
                 bestPaths.add(path);
             }
-
         }
 
         return bestPaths;
