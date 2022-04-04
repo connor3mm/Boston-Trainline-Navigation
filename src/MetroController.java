@@ -38,6 +38,7 @@ public class MetroController {
         // add station names to dropdown menu
         List<String> stationNames = model.getStationNames();
         java.util.Collections.sort(stationNames);
+
         departureOption.getItems().addAll(stationNames);
         destinationOption.getItems().addAll(stationNames);
 
@@ -62,16 +63,27 @@ public class MetroController {
                 List<List<String>> findPathValue = model.findPath(departureOption.getValue().toString(),destinationOption.getValue().toString());
                 List<String> stationNameFromID = new ArrayList<>();
                 List<List<String>> bestRoutePath = model.bestLinePath(findPathValue);
+                routeResult.setText("");
                 for(List<String> path : bestRoutePath) {
                     stationNameFromID = model.getStationNamesFromID(path);
                     String resultToString = model.convertToString(stationNameFromID);
                     int numberOfLines = model.numOfLineSwitches(path);
-                    routeResult.setText(resultToString);
+                    int countStops = 0;
+                    for(int i = 1; i < path.size()-1; i++) {
+                        countStops++;
+                    }
+                    routeResult.appendText("From station " + departureOption.getValue().toString().trim() + " you have to travel " + countStops + " station to get to station " + destinationOption.getValue().toString().trim());
                     routeResult.appendText("\n");
-                    routeResult.appendText("Number of switched lines: " + numberOfLines);
+                    routeResult.appendText("Take the route");
+                    routeResult.appendText("\n");
+                    routeResult.appendText(resultToString);
+                    routeResult.appendText("\n");
+                    routeResult.appendText("Number of line switches for the route: " + numberOfLines);
+                    routeResult.appendText("\n\n");
                 }
 
             }
+
 
         });
 
