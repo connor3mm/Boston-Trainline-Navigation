@@ -135,7 +135,8 @@ public class GraphImplementation implements GraphADT<Station, Neighbour> {
 
         for (List<String> path : output) {
             if (path.size() == max) {
-                output2.add(path);
+                if (!output2.contains(path))
+                    output2.add(path);
             }
         }
 

@@ -41,6 +41,9 @@ public class MetroController {
 
         departureOption.getItems().addAll(stationNames);
         destinationOption.getItems().addAll(stationNames);
+        //Remove station 0(departure) from GUI
+        departureOption.getItems().remove(stationNames.size()-1);
+        destinationOption.getItems().remove(stationNames.size()-1);
 
         departureOption.setPromptText("e.g Arlington");
         destinationOption.setPromptText("e.g AllstonStreet");
@@ -67,11 +70,14 @@ public class MetroController {
                 for(List<String> path : bestRoutePath) {
                     stationNameFromID = model.getStationNamesFromID(path);
                     String resultToString = model.convertToString(stationNameFromID);
+
                     int numberOfLines = model.numOfLineSwitches(path);
                     int countStops = 0;
+
                     for(int i = 1; i < path.size()-1; i++) {
                         countStops++;
                     }
+
                     routeResult.appendText("From station " + departureOption.getValue().toString().trim() + " you have to travel " + countStops + " station to get to station " + destinationOption.getValue().toString().trim());
                     routeResult.appendText("\n");
                     routeResult.appendText("Take the route");
@@ -81,10 +87,7 @@ public class MetroController {
                     routeResult.appendText("Number of line switches for the route: " + numberOfLines);
                     routeResult.appendText("\n\n");
                 }
-
             }
-
-
         });
 
         ViewMapButton.setOnAction(evt -> { createNewStage(); });
