@@ -73,12 +73,17 @@ public class GraphImplementation implements GraphADT<Station, Neighbour> {
      * @param endStation
      * @return Final array of the path from start station to end
      */
-    public List<String> findRoute(String startStation, String endStation) {
+    public List<List<String>> findRoute(String startStation, String endStation) {
         List<String> visited = new ArrayList<>();
         Queue<List<String>> agenda = new LinkedList<>();
         ArrayList<String> stationsIDs = new ArrayList<>();
+
+        List<List<String>> output = new ArrayList<>();
+
         List<String> currentNodePath;
         String currentNode;
+
+        int max = 1000;
 
 
         stationsIDs.add(startStation);
@@ -92,13 +97,22 @@ public class GraphImplementation implements GraphADT<Station, Neighbour> {
                 continue;
             }
 
-            visited.add(currentNode);
-
 
             //Getting the last element of the current path and check if it is the end station then return the path
-            if (currentNodePath.contains(endStation)) {
-                return currentNodePath;
+
+            if(currentNodePath.size() > max) {
+                continue;
             }
+
+            if (currentNodePath.contains(endStation)) {
+
+                max = currentNodePath.size();
+                output.add(currentNodePath);
+                continue;
+                //return currentNodePath;
+            }
+
+            visited.add(currentNode);
 
             //Get neighbours of current station
             ArrayList<String> agendaList = extendPath(currentNode);
@@ -115,8 +129,19 @@ public class GraphImplementation implements GraphADT<Station, Neighbour> {
             }
             agenda.addAll(finalOutput);
         }
-        return null;
+
+        List<List<String>> output2 = new ArrayList<>();
+
+        for(List<String> path : output){
+            if(path.size() == max ){
+                output2.add(path);
+            }
+        }
+
+
+        return output2;
     }
+
 
 
     public Station getStationFromId(String id) {
