@@ -41,7 +41,7 @@ public class MetroModel {
 
         //Test for dfs search TO BE REMOVED
         System.out.println("===================================================");
-        List<List<String>> endPath = graph.findRoute("1", "115");  // ("0", "30") doesn't work cause 0 is starting destination
+        List<List<String>> endPath = graph.findRoute("0", "30");  // ("0", "30") doesn't work cause 0 is starting destination
         for(List<String> path : endPath){
             System.out.println("RESULT: " + path);
         }

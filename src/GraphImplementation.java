@@ -97,8 +97,6 @@ public class GraphImplementation implements GraphADT<Station, Neighbour> {
                 continue;
             }
 
-            visited.add(currentNode);
-
 
             //Getting the last element of the current path and check if it is the end station then return the path
 
@@ -114,6 +112,7 @@ public class GraphImplementation implements GraphADT<Station, Neighbour> {
                 //return currentNodePath;
             }
 
+            visited.add(currentNode);
 
             //Get neighbours of current station
             ArrayList<String> agendaList = extendPath(currentNode);
