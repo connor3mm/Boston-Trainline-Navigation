@@ -45,6 +45,9 @@ public class MetroModel {
         System.out.println("RESULT: " + endPath);
         int lineSwitches = graph.calculateLineSwitching(endPath);
         System.out.println("Line Switches " + lineSwitches);
+        System.out.println("****************************************************");
+        //System.out.println(getStationNamesFromID(endPath));
+        System.out.println(convertToString(getStationNamesFromID(endPath)));
     }
 
 
@@ -58,6 +61,61 @@ public class MetroModel {
         });
 
         return stationNames;
+    }
+
+    public List<String> getStationNamesFromID(List<String> path){
+        List<String> stationNames = new ArrayList<>();
+        List<Station> stationList = graph.getStations();
+
+        for (int i=0; i< path.size();i++){
+            stationNames.add(stationList.get(Integer.parseInt(path.get(i))).getStationName());//getting the name of the stations
+        }
+
+        return stationNames;
+    }
+
+    public String convertToString(List<String> names){
+        String string = names.get(0).trim();
+        string = string + " > ";
+
+        for (int i=1; i<names.size();i++){
+            string = string + names.get(i).trim();
+
+            if(i != names.size()-1) {
+                string += " > ";
+            }
+        }
+        return string;
+    }
+
+    public String getIdOFStationFromList(String station){
+        List<Station> stationList = graph.getStations();
+        String id = "";
+
+        for (int i=0; i< stationList.size();i++){
+            if(stationList.get(i).getStationName() == station){
+                id = stationList.get(i).getId();
+            }
+        }
+
+        return id;
+    }
+
+    public List<String> findPath(String start, String end){
+        List<Station> stationList = graph.getStations();
+
+        start = getIdOFStationFromList(start);
+        end = getIdOFStationFromList(end);
+
+        List<String> endPath = graph.findRoute(start, end);
+
+        return endPath;
+    }
+
+
+    public int numOfLineSwitches(List<String> endPath){
+        int lineSwitching = graph.calculateLineSwitching(endPath);
+        return lineSwitching;
     }
 
 }
