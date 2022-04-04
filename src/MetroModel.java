@@ -41,13 +41,16 @@ public class MetroModel {
 
         //Test for dfs search TO BE REMOVED
         System.out.println("===================================================");
-        List<String> endPath = graph.findRoute("5", "30");  // ("0", "30") doesn't work cause 0 is starting destination
-        System.out.println("RESULT: " + endPath);
-        int lineSwitches = graph.calculateLineSwitching(endPath);
-        System.out.println("Line Switches " + lineSwitches);
+        List<List<String>> endPath = graph.findRoute("1", "115");  // ("0", "30") doesn't work cause 0 is starting destination
+        for(List<String> path : endPath){
+            System.out.println("RESULT: " + path);
+        }
+
+        //int lineSwitches = graph.calculateLineSwitching(endPath);
+       // System.out.println("Line Switches " + lineSwitches);
         System.out.println("****************************************************");
         //System.out.println(getStationNamesFromID(endPath));
-        System.out.println(convertToString(getStationNamesFromID(endPath)));
+        //System.out.println(convertToString(getStationNamesFromID(endPath)));
     }
 
 
@@ -101,13 +104,13 @@ public class MetroModel {
         return id;
     }
 
-    public List<String> findPath(String start, String end){
+    public List<List<String>> findPath(String start, String end){
         List<Station> stationList = graph.getStations();
 
         start = getIdOFStationFromList(start);
         end = getIdOFStationFromList(end);
 
-        List<String> endPath = graph.findRoute(start, end);
+        List<List<String>> endPath = graph.findRoute(start, end);
 
         return endPath;
     }
