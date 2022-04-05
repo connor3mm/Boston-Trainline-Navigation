@@ -18,7 +18,5 @@ public class Station {
         return id;
     }
 
-    public String getStationName() {
-        return stationName;
-    }
+    public String getStationName() {return stationName;}
 }

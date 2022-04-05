@@ -3,6 +3,7 @@ import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class MetroModel {
     public static GraphImplementation graph;
@@ -125,9 +126,8 @@ public class MetroModel {
     public String getIdOFStationFromList(String station) {
         List<Station> stationList = graph.getStations();
         String id = "";
-
         for (int i = 0; i < stationList.size(); i++) {
-            if (stationList.get(i).getStationName() == station) {
+            if (Objects.equals(stationList.get(i).getStationName(), station)) {
                 id = stationList.get(i).getId();
             }
         }
@@ -146,7 +146,6 @@ public class MetroModel {
     public List<List<String>> findPath(String start, String end) {
         start = getIdOFStationFromList(start);
         end = getIdOFStationFromList(end);
-
         return graph.findRoute(start, end);
     }
 
@@ -181,7 +180,6 @@ public class MetroModel {
                 bestPaths.add(path);
             }
         }
-
         return bestPaths;
     }
 }
