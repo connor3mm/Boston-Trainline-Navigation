@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class GraphImplementation implements GraphADT<Station, Neighbour> {
+public class GraphImplementation implements GraphADT {
 
     //Variables
     private List<Station> stations;
@@ -28,6 +28,7 @@ public class GraphImplementation implements GraphADT<Station, Neighbour> {
 
     /**
      * Add stations to map.
+     *
      * @param station
      */
     @Override
@@ -138,6 +139,7 @@ public class GraphImplementation implements GraphADT<Station, Neighbour> {
 
     /**
      * Finds minimal path from given list.
+     *
      * @param output
      * @param max
      * @return allPaths
@@ -227,5 +229,4 @@ public class GraphImplementation implements GraphADT<Station, Neighbour> {
         }
         return lineSwitchTotal;
     }
-
 }

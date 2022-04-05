@@ -1,11 +1,10 @@
-import java.util.ArrayList;
 import java.util.List;
 
-public interface GraphADT<N,E> {
+public interface GraphADT {
 
-    public void addStation(Station station);
+    void addStation(Station station);
 
-    public void addEdge(Neighbour neighbour);
+    void addEdge(Neighbour neighbour);
 
-    public List<Neighbour> getNeighbouringNodes(Station station);
+    List<Neighbour> getNeighbouringNodes(Station station);
 }

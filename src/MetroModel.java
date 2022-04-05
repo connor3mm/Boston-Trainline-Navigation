@@ -7,7 +7,7 @@ import java.util.Map;
 public class MetroModel {
     public static GraphImplementation graph;
 
-
+    //main for testing
     public static void main(String[] args) {
         MetroModel model = new MetroModel();
         model.initializeGraph();
@@ -19,44 +19,52 @@ public class MetroModel {
 //        System.out.println(s.get(0).getNextStationId());
     }
 
+    /**
+     * initializer to build the model.
+     */
     public void initializeGraph() {
         graph = new GraphImplementation();
         APIData data = new APIData();
         data.readFromAFile();
+
         List<Station> stations = data.getStations();
         List<Neighbour> neighbours = data.getNeighbours();
 
         graph.addStation(new Station("0", "departure"));
+
         for (Station station : stations) {
             graph.addStation(station);
         }
-
 
         for (Neighbour neighbour : neighbours) {
             graph.addEdge(neighbour);
         }
 
-
         graph.displayMap();
 
         //Test for dfs search TO BE REMOVED
-        System.out.println("===================================================");
-        List<List<String>> endPath = graph.findRoute("74", "34");
-        for (List<String> path : endPath) {
-            System.out.println("RESULT: " + path);
-        }
-
-        System.out.println("****************************************************");
-        System.out.println(bestLinePath(endPath));
-
-        //int lineSwitches = graph.calculateLineSwitching(endPath);
-        // System.out.println("Line Switches " + lineSwitches);
-        System.out.println("****************************************************");
-        //System.out.println(getStationNamesFromID(endPath));
-        //System.out.println(convertToString(getStationNamesFromID(endPath)));
+//        System.out.println("===================================================");
+//        List<List<String>> endPath = graph.findRoute("74", "34");
+//        for (List<String> path : endPath) {
+//            System.out.println("RESULT: " + path);
+//        }
+//
+//        System.out.println("****************************************************");
+//        System.out.println(bestLinePath(endPath));
+//
+//        //int lineSwitches = graph.calculateLineSwitching(endPath);
+//        // System.out.println("Line Switches " + lineSwitches);
+//        System.out.println("****************************************************");
+//        //System.out.println(getStationNamesFromID(endPath));
+//        //System.out.println(convertToString(getStationNamesFromID(endPath)));
     }
 
 
+    /**
+     * Gets all station names
+     *
+     * @return list of station names
+     */
     public List<String> getStationNames() {
         List<Station> stationList = graph.getStations();
         List<String> stationNames = new ArrayList<>();
@@ -68,17 +76,31 @@ public class MetroModel {
         return stationNames;
     }
 
+
+    /**
+     * Gets station name from their ID
+     *
+     * @param path
+     * @return List of station names
+     */
     public List<String> getStationNamesFromID(List<String> path) {
         List<String> stationNames = new ArrayList<>();
         List<Station> stationList = graph.getStations();
 
         for (int i = 0; i < path.size(); i++) {
-            stationNames.add(stationList.get(Integer.parseInt(path.get(i))).getStationName());//getting the name of the stations
+            stationNames.add(stationList.get(Integer.parseInt(path.get(i))).getStationName());
         }
 
         return stationNames;
     }
 
+
+    /**
+     * Converts list to a string of stations with > between them
+     *
+     * @param names
+     * @return String of stations
+     */
     public String convertToString(List<String> names) {
         StringBuilder string = new StringBuilder(names.get(0).trim());
         string.append(" > ");
@@ -94,6 +116,12 @@ public class MetroModel {
     }
 
 
+    /**
+     * Gets ID's from station names.
+     *
+     * @param station
+     * @return ID of station
+     */
     public String getIdOFStationFromList(String station) {
         List<Station> stationList = graph.getStations();
         String id = "";
@@ -107,6 +135,14 @@ public class MetroModel {
         return id;
     }
 
+
+    /**
+     * Finds the path from start station to end station.
+     *
+     * @param start
+     * @param end
+     * @return List of paths
+     */
     public List<List<String>> findPath(String start, String end) {
         start = getIdOFStationFromList(start);
         end = getIdOFStationFromList(end);
@@ -115,11 +151,23 @@ public class MetroModel {
     }
 
 
+    /**
+     * Gets line switching number for single path
+     *
+     * @param endPath
+     * @return Number of line switches
+     */
     public int numOfLineSwitches(List<String> endPath) {
         return graph.calculateLineSwitching(endPath);
     }
 
 
+    /**
+     * Finds the best path in a list of paths.
+     *
+     * @param paths
+     * @return List of best paths
+     */
     public List<List<String>> bestLinePath(List<List<String>> paths) {
         List<List<String>> bestPaths = new ArrayList<>();
         int bestLine = 1000;
@@ -136,5 +184,4 @@ public class MetroModel {
 
         return bestPaths;
     }
-
 }
