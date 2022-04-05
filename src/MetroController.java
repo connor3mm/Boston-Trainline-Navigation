@@ -28,6 +28,7 @@ public class MetroController {
     @FXML
     public ImageView ViewMapIcon;
 
+
     // Model object
     MetroModel model = new MetroModel();
 
@@ -133,7 +134,6 @@ public class MetroController {
         try {
             newScene = new Scene(loader.load());
         } catch (IOException ex) {
-            // TODO: handle error maybe????
             return;
         }
 
@@ -141,6 +141,15 @@ public class MetroController {
         mapStage.setScene(newScene);
         mapStage.setTitle("Boston Metro Digital Map");
         mapStage.setResizable(false);
-        mapStage.showAndWait();
+        mapStage.show();
+
+        // Closes the Map GUI when the close button is pressed
+        Button CloseButton = (Button) newScene.lookup("#CloseButton");
+        assert CloseButton != null;
+        CloseButton.setOnAction(evt -> {
+            mapStage.close();
+        });
     }
+
+
 }
