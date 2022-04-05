@@ -44,20 +44,20 @@ public class MetroModel {
         graph.displayMap();
 
         //Test for bfs search TO BE REMOVED
-//        System.out.println("===================================================");
-//        List<List<String>> endPath = graph.findRoute("74", "34");
-//        for (List<String> path : endPath) {
-//            System.out.println("RESULT: " + path);
-//        }
-//
-//        System.out.println("****************************************************");
-//        System.out.println(bestLinePath(endPath));
-//
-//        //int lineSwitches = graph.calculateLineSwitching(endPath);
-//        // System.out.println("Line Switches " + lineSwitches);
-//        System.out.println("****************************************************");
-//        //System.out.println(getStationNamesFromID(endPath));
-//        //System.out.println(convertToString(getStationNamesFromID(endPath)));
+        System.out.println("===================================================");
+        List<List<String>> endPath = graph.findRoute("118", "13");
+        for (List<String> path : endPath) {
+            System.out.println("RESULT: " + path);
+        }
+
+        System.out.println("****************************************************");
+        System.out.println(bestLinePath(endPath));
+
+        //int lineSwitches = graph.calculateLineSwitching(endPath);
+        // System.out.println("Line Switches " + lineSwitches);
+        System.out.println("****************************************************");
+        //System.out.println(getStationNamesFromID(endPath));
+        //System.out.println(convertToString(getStationNamesFromID(endPath)));
     }
 
 
@@ -168,18 +168,29 @@ public class MetroModel {
      * @return List of best paths
      */
     public List<List<String>> bestLinePath(List<List<String>> paths) {
-        List<List<String>> bestPaths = new ArrayList<>();
+        List<Integer> positions = new ArrayList<>();
         int bestLine = 1000;
 
         for (List<String> path : paths) {
             int lines = 0;
             lines = graph.calculateLineSwitching(path);
+            positions.add(lines);
 
             if (lines <= bestLine) {
                 bestLine = lines;
-                bestPaths.add(path);
             }
         }
-        return bestPaths;
+
+        //Finds paths with the lowest line switching
+        List<List<String>> allPaths = new ArrayList<>();
+
+        for (int i = 0; i < positions.size(); i++) {
+
+            if(positions.get(i) == bestLine){
+                allPaths.add(paths.get(i));
+            }
+        }
+
+        return allPaths;
     }
 }
