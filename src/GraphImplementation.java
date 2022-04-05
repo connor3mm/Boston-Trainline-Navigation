@@ -216,10 +216,14 @@ public class GraphImplementation implements GraphADT {
                 if (neigh.getPreviousStationID().equals(endPath.get(i + 1)) || neigh.getNextStationId().equals(endPath.get(i + 1))) {
                     String tempLineColour = neigh.getLineColour();
 
-                    if ((currentColour != null) && (!currentColour.equals(tempLineColour))) {
-                        lineSwitchTotal += 1;
+                    if (currentColour != null && tempLineColour != null) {
+                        if(!currentColour.equals(tempLineColour)){
+                            lineSwitchTotal += 1;
+                            System.out.println(currentColour);
+                        }
+
                         currentColour = tempLineColour;
-                        System.out.println(currentColour);
+
                         break;
                     }
 
