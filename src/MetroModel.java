@@ -43,7 +43,7 @@ public class MetroModel {
 
         graph.displayMap();
 
-        //Test for dfs search TO BE REMOVED
+        //Test for bfs search TO BE REMOVED
 //        System.out.println("===================================================");
 //        List<List<String>> endPath = graph.findRoute("74", "34");
 //        for (List<String> path : endPath) {

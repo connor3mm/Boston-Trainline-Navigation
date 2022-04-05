@@ -76,7 +76,7 @@ public class GraphImplementation implements GraphADT {
      *
      * @param startStation
      * @param endStation
-     * @return Final array of the path(s) from start station to end
+     * @return Final list of the path(s) from start station to end
      */
     public List<List<String>> findRoute(String startStation, String endStation) {
         Queue<List<String>> agenda = new LinkedList<>();
