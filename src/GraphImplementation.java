@@ -215,12 +215,7 @@ public class GraphImplementation implements GraphADT {
 
 
             if (temp.size() > 2) {
-                for (Neighbour neighbour : temp) {
-                    if ((neighbour.getPreviousStationID().equals(endPath.get(i - 1)) && neighbour.getNextStationId().equals(endPath.get(i + 1))) || (neighbour.getPreviousStationID().equals(endPath.get(i + 1)) && neighbour.getNextStationId().equals(endPath.get(i - 1))) ) {
-                        temp = new ArrayList<>();
-                        temp.add(neighbour);
-                    }
-                }
+               continue;
             }
 
             for (Neighbour neigh : temp) {
