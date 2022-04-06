@@ -62,9 +62,9 @@ public class MetroController {
         //Checks for errors, if no errors, display text output of path.
         FindRouteButton.setOnAction(actionEvent -> {
             if (departureOption.getValue() == null || destinationOption.getValue() == null) {
-                validationCheck(Alert.AlertType.ERROR, "Empty inputs", "Empty input!", "Please choose both a departure and destination option!");
+                displayError(Alert.AlertType.ERROR, "Empty inputs", "Empty input!", "Please choose both a departure and destination option!");
             } else if (departureOption.getValue() == destinationOption.getValue()) {
-                validationCheck(Alert.AlertType.WARNING, "Identical destination and departure", "Both destination and departure stations are identical.", "Please choose different stations!");
+                displayError(Alert.AlertType.WARNING, "Identical destination and departure", "Both destination and departure stations are identical.", "Please choose different stations!");
             } else {
                 displayTextOutput();
             }
@@ -117,7 +117,7 @@ public class MetroController {
      * @param x
      * @param x1
      */
-    private void validationCheck(Alert.AlertType error, String Empty_inputs, String x, String x1) {
+    private void displayError(Alert.AlertType error, String Empty_inputs, String x, String x1) {
         Alert alert = new Alert(error);
         alert.setTitle(Empty_inputs);
         alert.setContentText(x + "\n" + x1);

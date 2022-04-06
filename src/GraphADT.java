@@ -7,4 +7,6 @@ public interface GraphADT {
     void addEdge(Neighbour neighbour);
 
     List<Neighbour> getNeighbouringNodes(Station station);
+
+    List<Station> getStations();
 }

@@ -21,6 +21,7 @@ public class GraphImplementation implements GraphADT {
         return stationToNeighbourMap.get(station);
     }
 
+    @Override
     public List<Station> getStations() {
         return this.stations;
     }
