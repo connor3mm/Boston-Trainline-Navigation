@@ -213,18 +213,27 @@ public class GraphImplementation implements GraphADT {
             Station station = getStationFromId(endPath.get(i));
             List<Neighbour> temp = getNeighbouringNodes(station);
 
+
+            if (temp.size() > 2) {
+                for (Neighbour neighbour : temp) {
+                    if ((neighbour.getPreviousStationID().equals(endPath.get(i - 1)) && neighbour.getNextStationId().equals(endPath.get(i + 1))) || (neighbour.getPreviousStationID().equals(endPath.get(i + 1)) && neighbour.getNextStationId().equals(endPath.get(i - 1))) ) {
+                        temp = new ArrayList<>();
+                        temp.add(neighbour);
+                    }
+                }
+            }
+
             for (Neighbour neigh : temp) {
                 if (neigh.getPreviousStationID().equals(endPath.get(i + 1)) || neigh.getNextStationId().equals(endPath.get(i + 1))) {
                     String tempLineColour = neigh.getLineColour();
 
                     if (currentColour != null && tempLineColour != null) {
-                        if(!currentColour.equals(tempLineColour)){
+                        if (!currentColour.equals(tempLineColour)) {
                             lineSwitchTotal += 1;
+                            currentColour = tempLineColour;
                             System.out.println(currentColour);
+
                         }
-
-                        currentColour = tempLineColour;
-
                         break;
                     }
 
