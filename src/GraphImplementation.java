@@ -204,38 +204,60 @@ public class GraphImplementation implements GraphADT {
      * @return The number of line switches
      */
     public int calculateLineSwitching(List<String> endPath) {
-
         int lineSwitchTotal = 0;
-        String currentColour = null;
+        List<String> list1 =  new ArrayList<>();
+
+        int count = 0;
 
 
-        for (int i = 0; i < endPath.size() - 1; i++) {
-            Station station = getStationFromId(endPath.get(i));
-            List<Neighbour> temp = getNeighbouringNodes(station);
+        if(endPath.size() == 2){
+            return 0;
+        }
 
 
-            if (temp.size() > 2) {
-               continue;
-            }
+        //get first station, get first stations neighbours
+        Station station = getStationFromId(endPath.get(0));
+        List<Neighbour> neighbours = getNeighbouringNodes(station);
 
-            for (Neighbour neigh : temp) {
-                if (neigh.getPreviousStationID().equals(endPath.get(i + 1)) || neigh.getNextStationId().equals(endPath.get(i + 1))) {
-                    String tempLineColour = neigh.getLineColour();
-
-                    if (currentColour != null && tempLineColour != null) {
-                        if (!currentColour.equals(tempLineColour)) {
-                            lineSwitchTotal += 1;
-                            currentColour = tempLineColour;
-                            System.out.println(currentColour);
-                        }
-                        break;
-                    }
-
-                    currentColour = tempLineColour;
-                    break;
-                }
+        //for all neighbours, check if the next station id appears from endpath.
+        for (Neighbour neigh : neighbours) {
+            if (neigh.getPreviousStationID().equals(endPath.get(1)) || neigh.getNextStationId().equals(endPath.get(1))) {
+                String tempLineColour = neigh.getLineColour();
+                list1.add(tempLineColour);
             }
         }
+
+
+        //for the rest of endpath, for each, check if the next station id appears from endpath.
+        for (int i = 1; i < endPath.size() - 1; i++) {
+            List<String> list2 =  new ArrayList<>();
+            station = getStationFromId(endPath.get(i));
+            neighbours = getNeighbouringNodes(station);
+
+
+            for (Neighbour neigh : neighbours) {
+                if (neigh.getPreviousStationID().equals(endPath.get(i + 1)) || neigh.getNextStationId().equals(endPath.get(i + 1))) {
+                    String tempLineColour = neigh.getLineColour();
+                    list2.add(tempLineColour);
+                }
+            }
+
+            //Check if first list has a colour matching list 2
+            for (String colour: list1){
+                if(list2.contains(colour)){
+                 count += 1;
+                }
+            }
+
+            //if no colours match, line switching occurs
+            if(count == 0){
+                lineSwitchTotal +=1;
+            }
+
+            count = 0;
+            list1 = list2;
+        }
+
         return lineSwitchTotal;
     }
 }

@@ -97,7 +97,7 @@ public class MetroController {
             int numberOfLines = model.numOfLineSwitches(path);
             int countStops = path.size() - 1;
 
-            routeResult.appendText("From station " + departureOption.getValue().toString().trim() + " you have to travel " + countStops + " stations to get to station " + destinationOption.getValue().toString().trim());
+            routeResult.appendText("From station " + departureOption.getValue().toString().trim() + " you have to travel " + countStops + " station(s) to get to station " + destinationOption.getValue().toString().trim());
             routeResult.appendText("\n");
             routeResult.appendText("Take the route");
             routeResult.appendText("\n");

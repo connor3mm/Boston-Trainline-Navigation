@@ -47,7 +47,7 @@ public class MetroModel {
 
         //Test for bfs search TO BE REMOVED
         System.out.println("===================================================");
-        List<List<String>> endPath = graph.findRoute("20", "23");
+        List<List<String>> endPath = graph.findRoute("106", "95");
         for (List<String> path : endPath) {
             System.out.println("RESULT: " + path);
         }
