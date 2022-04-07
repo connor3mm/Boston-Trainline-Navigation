@@ -244,7 +244,6 @@ class MetroModelTest {
         String end = "Aquarium\t\t";
 
         List<List<String>> findPathValue = model.findPath(start, end);
-        List<List<String>> bestRoutePath = model.bestLinePath(findPathValue);
 
         List<List<String>> answerLists = new ArrayList<>();
         List<String> answerList = new ArrayList<>();
@@ -257,9 +256,10 @@ class MetroModelTest {
 
         answerLists.add(answerList);
 
-        System.out.println(bestRoutePath);
-        System.out.println(answerList);
-        Assertions.assertEquals(bestRoutePath, answerLists);
+        List<List<String>> bestRoutePath = model.bestLinePath(findPathValue);
+        List<List<String>> bestRoutePath2 = model.bestLinePath(answerLists);
+
+        Assertions.assertEquals(bestRoutePath, bestRoutePath2);
 
     }
 
