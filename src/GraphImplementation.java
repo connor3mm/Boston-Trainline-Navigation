@@ -227,12 +227,12 @@ public class GraphImplementation implements GraphADT {
                             lineSwitchTotal += 1;
                             currentColour = tempLineColour;
                             System.out.println(currentColour);
-
                         }
                         break;
                     }
 
                     currentColour = tempLineColour;
+                    break;
                 }
             }
         }
