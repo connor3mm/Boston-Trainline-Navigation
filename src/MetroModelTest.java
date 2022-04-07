@@ -231,5 +231,37 @@ class MetroModelTest {
     }
 
 
+    /**
+     * This tests a station that can start on multiple line colours.
+     */
+    @org.junit.jupiter.api.Test
+    void testMultipleLineStart() {
+
+        MetroModel model = new MetroModel();
+        model.initializeGraph();
+
+        String start = "NorthStation\t";
+        String end = "Aquarium\t\t";
+
+        List<List<String>> findPathValue = model.findPath(start, end);
+        List<List<String>> bestRoutePath = model.bestLinePath(findPathValue);
+
+        List<List<String>> answerLists = new ArrayList<>();
+        List<String> answerList = new ArrayList<>();
+
+        answerList.add("20");
+        answerList.add("22");
+        answerList.add("28");
+        answerList.add("26");
+
+
+        answerLists.add(answerList);
+
+        System.out.println(bestRoutePath);
+        System.out.println(answerList);
+        Assertions.assertEquals(bestRoutePath, answerLists);
+
+    }
+
 
 }
