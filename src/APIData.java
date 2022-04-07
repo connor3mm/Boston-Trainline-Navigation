@@ -21,9 +21,8 @@ public class APIData {
     /**
      * Read stations and neighbours from file and add them to station and neighbours lists.
      */
-    public void readFromAFile() {
+    public void readFromAFile(File myObj) {
         try {
-            File myObj = new File("src/StationFile/bostonmetro.txt");
             Scanner myReader = new Scanner(myObj);
 
             //split everything up

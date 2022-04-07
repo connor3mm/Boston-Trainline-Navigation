@@ -6,12 +6,18 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
 import java.util.List;
+import java.util.Collections;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class MetroModelTest {
 
-    //the test checks whether the “getStationNames()” function returns a list with all of the stations
+
+
+    /**
+     * The test checks whether the “getStationNames()” function returns a list with all of the stations
+     * @throws FileNotFoundException
+     */
     @org.junit.jupiter.api.Test
     void getStationNames() throws FileNotFoundException {
         MetroModel model = new MetroModel();
@@ -49,8 +55,12 @@ class MetroModelTest {
         Assertions.assertTrue(testStringFromFunction.equals(testString));
     }
 
-    //the test checks, whether the function “getIdOFStationFromList()” takes the correct ID of the station.
-    //For this purpose, station “Andrew” was used as a testing station, whose id is “94”
+
+
+    /**
+     *  The test checks, whether the function “getIdOFStationFromList()” takes the correct ID of the station.
+     *  For this purpose, station “Andrew” was used as a testing station, whose id is “94”
+     */
     @org.junit.jupiter.api.Test
     void getIdOFStationFromList() {
         MetroModel model = new MetroModel();
@@ -62,8 +72,12 @@ class MetroModelTest {
         Assertions.assertTrue(Objects.equals(id, "94"));
     }
 
-    //the test checks whether the function has found all paths. This function compares the ID of stations and not the station names.
-    //For this test, the test calculates the paths from “Andrew” station to “Central” station
+
+
+    /**
+     * The test checks whether the function has found all paths. This function compares the ID of stations and not the station names.
+     *  For this test, the test calculates the paths from “Andrew” station to “Central” station
+     */
     @org.junit.jupiter.api.Test
     void findPath() {
         MetroModel model = new MetroModel();
@@ -91,8 +105,12 @@ class MetroModelTest {
         Assertions.assertTrue(findPathValue.equals(answerLists));
     }
 
-    //checks whether the number of the switched lines is correct.
-    //For this example, the route from “Andrew” station to “Central” station is used. The number of line switches should be 0
+
+
+    /**
+     * checks whether the number of the switched lines is correct.
+     * For this example, the route from “Andrew” station to “Central” station is used. The number of line switches should be 0
+     */
     @org.junit.jupiter.api.Test
     void numOfLineSwitches() {
         MetroModel model = new MetroModel();
@@ -114,9 +132,13 @@ class MetroModelTest {
         Assertions.assertTrue(numberOfLinesSwitched == 0);
     }
 
-    //the test checks if the most optimal path is chosen from all of the found paths.
-    //For this test, the routes from “OrientHeights” station to “HeathStreet” station are calculated.
-    //The algorithm finds two paths but chooses the best one.
+
+
+    /**
+     * The test checks if the most optimal path is chosen from all of the found paths.
+     * For this test, the routes from “OrientHeights” station to “HeathStreet” station are calculated.
+     * The algorithm finds two paths but chooses the best one.
+     */
     @org.junit.jupiter.api.Test
     void bestLinePath() {
         MetroModel model = new MetroModel();
@@ -157,4 +179,57 @@ class MetroModelTest {
 
         Assertions.assertTrue(answerLists.equals(bestRoutePath));
     }
+
+
+    /**
+     * This test if the path line switching going forward, equals the path line switching going backwards
+     */
+    @org.junit.jupiter.api.Test
+    void equalPathLineSwitching() {
+
+        MetroModel model = new MetroModel();
+        model.initializeGraph();
+
+        String start = "Aquarium\t\t";
+        String end = "Broadway\t\t";
+
+        List<List<String>> findPathValue = model.findPath(start, end);
+        List<List<String>> bestRoutePath = model.bestLinePath(findPathValue);
+
+        List<List<String>> findPathValue2 = model.findPath(end, start);
+        List<List<String>> bestRoutePath2 = model.bestLinePath(findPathValue2);
+
+
+        int numberOfLinesSwitched = model.numOfLineSwitches(bestRoutePath.get(0));
+        int numberOfLinesSwitched2 = model.numOfLineSwitches(bestRoutePath2.get(0));
+
+        Assertions.assertEquals(numberOfLinesSwitched, numberOfLinesSwitched2);
+    }
+
+
+    /**
+     * This test if the path going forward, equals the path going backwards
+     */
+    @org.junit.jupiter.api.Test
+    void equalPathDirection() {
+
+        MetroModel model = new MetroModel();
+        model.initializeGraph();
+
+        String start = "Aquarium\t\t";
+        String end = "Broadway\t\t";
+
+        List<List<String>> findPathValue = model.findPath(start, end);
+        List<List<String>> bestRoutePath = model.bestLinePath(findPathValue);
+
+        List<List<String>> findPathValue2 = model.findPath(end, start);
+        List<List<String>> bestRoutePath2 = model.bestLinePath(findPathValue2);
+
+        Collections.reverse(bestRoutePath2.get(0));
+
+        Assertions.assertEquals(bestRoutePath, bestRoutePath2);
+    }
+
+
+
 }

@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.io.File;
 import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,8 +26,9 @@ public class MetroModel {
      */
     public void initializeGraph() {
         graph = new GraphImplementation();
+        File myObj = new File("src/StationFile/bostonmetro.txt");
         APIData data = new APIData();
-        data.readFromAFile();
+        data.readFromAFile(myObj);
 
         List<Station> stations = data.getStations();
         List<Neighbour> neighbours = data.getNeighbours();
