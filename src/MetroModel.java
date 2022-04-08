@@ -14,7 +14,7 @@ public class MetroModel {
         MetroModel model = new MetroModel();
         model.initializeGraph();
         List<Station> stations = graph.getStations();
-        List<Neighbour> s = graph.getNeighbouringNodes(stations.get(6));
+//        List<Neighbour> s = graph.getNeighbouringNodes(stations.get(6));
 //        System.out.println(stations.get(6).getStationName());
 //        System.out.println(s.get(0).getLineColour());
 //        System.out.println(s.get(0).getPreviousStationID());
@@ -45,7 +45,7 @@ public class MetroModel {
 
         graph.displayMap();
 
-        //Test for bfs search TO BE REMOVED
+        //Test for bfs search, to show the route in the console
         System.out.println("===================================================");
         List<List<String>> endPath = graph.findRoute("26", "20");
         for (List<String> path : endPath) {
@@ -120,7 +120,7 @@ public class MetroModel {
 
 
     /**
-     * Gets ID's from station names.
+     * Gets IDs from station names
      *
      * @param station
      * @return ID of station
@@ -139,11 +139,11 @@ public class MetroModel {
 
 
     /**
-     * Finds the path from start station to end station.
+     * Finds the path from start station to end station
      *
      * @param start
      * @param end
-     * @return List of paths
+     * @return List of all possible min paths
      */
     public List<List<String>> findPath(String start, String end) {
         start = getIdOFStationFromList(start);
@@ -164,7 +164,7 @@ public class MetroModel {
 
 
     /**
-     * Finds the best path in a list of paths.
+     * Finds the best path in a list of paths (best path with min line switching)
      *
      * @param paths
      * @return List of best paths

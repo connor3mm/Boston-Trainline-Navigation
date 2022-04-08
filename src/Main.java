@@ -7,6 +7,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+
+//To run the application
 public class Main extends Application {
 
     /**

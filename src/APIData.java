@@ -19,7 +19,7 @@ public class APIData {
     }
 
     /**
-     * Read stations and neighbours from file and add them to station and neighbours lists.
+     * Read stations and neighbours from file and add them to station and neighbours lists
      */
     public void readFromAFile(File myObj) {
         try {
@@ -27,7 +27,7 @@ public class APIData {
 
             //split everything up
             //for each station store id and name in station class
-            // for each neighbour(line color, prev, next) create new neighbour object and add to station list
+            // for each neighbour(line color, prev, next) create new neighbour object and add station to station list
             while (myReader.hasNextLine()) {
                 //Separates the stations and edges then gets the station information
                 String currentStation = myReader.nextLine().trim();

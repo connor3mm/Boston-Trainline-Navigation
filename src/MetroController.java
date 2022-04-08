@@ -51,7 +51,7 @@ public class MetroController {
         departureOption.setPromptText("e.g Arlington");
         destinationOption.setPromptText("e.g AllstonStreet");
 
-        //for testing the user input in the terminal
+        //for testing - getting the user input in the terminal
         departureOption.setOnAction(evt -> {
             System.out.println(departureOption.getValue());
         });
@@ -59,7 +59,7 @@ public class MetroController {
             System.out.println(destinationOption.getValue());
         });
 
-        //Checks for errors, if no errors, display text output of path.
+        //Checks for errors, if no errors, display text output of path
         FindRouteButton.setOnAction(actionEvent -> {
             if (departureOption.getValue() == null || destinationOption.getValue() == null) {
                 displayError(Alert.AlertType.ERROR, "Empty inputs", "Empty input!", "Please choose both a departure and destination option!");
@@ -70,7 +70,7 @@ public class MetroController {
             }
         });
 
-        //Display map from GUI
+        //Display map in GUI
         ViewMapButton.setOnAction(evt -> {
             createNewStage();
         });
@@ -81,7 +81,7 @@ public class MetroController {
 
 
     /**
-     * Creates the path output for the text area box
+     * Displays the path output in the text area box
      */
     private void displayTextOutput() {
         List<List<String>> findPathValue = model.findPath(departureOption.getValue().toString(), destinationOption.getValue().toString());
@@ -110,7 +110,7 @@ public class MetroController {
 
 
     /**
-     * Outputs validation error message.
+     * Outputs validation error message
      *
      * @param error
      * @param Empty_inputs
@@ -126,7 +126,7 @@ public class MetroController {
 
 
     /**
-     * Creates GUI map page.
+     * Creates a view for the map
      */
     public void createNewStage() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("map.fxml"));

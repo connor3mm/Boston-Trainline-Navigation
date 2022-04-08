@@ -28,7 +28,7 @@ public class GraphImplementation implements GraphADT {
 
 
     /**
-     * Add stations to map.
+     * Add stations to map data structure
      *
      * @param station
      */
@@ -77,7 +77,7 @@ public class GraphImplementation implements GraphADT {
      *
      * @param startStation
      * @param endStation
-     * @return Final list of the path(s) from start station to end
+     * @return Final list of the path(s) from start station to end station
      */
     public List<List<String>> findRoute(String startStation, String endStation) {
         Queue<List<String>> agenda = new LinkedList<>();
@@ -88,7 +88,6 @@ public class GraphImplementation implements GraphADT {
         List<String> currentNodePath;
         String currentNode;
         int max = 1000;
-
 
         stationsIDs.add(startStation);
         agenda.add(stationsIDs);
@@ -119,7 +118,7 @@ public class GraphImplementation implements GraphADT {
 
             ArrayList<ArrayList<String>> tempOutput = new ArrayList<>();
 
-            //For every neighbour of current node, create new array and append neighbour, if neighbour is not in current path list.
+            //For every neighbour of current node, create new array and append neighbour, if neighbour is not in current path list
             for (String neighbour : nextStates) {
                 ArrayList<String> tempList = new ArrayList<>(currentNodePath);
 
@@ -131,7 +130,7 @@ public class GraphImplementation implements GraphADT {
             agenda.addAll(tempOutput);
         }
 
-        //Finds the best path(s) that has the minimal stops.
+        //Finds the best path(s) that has the minimal stops
         List<List<String>> allPaths = getMinPath(output, max);
 
         return allPaths;
@@ -139,7 +138,7 @@ public class GraphImplementation implements GraphADT {
 
 
     /**
-     * Finds minimal path from given list.
+     * Finds minimal path from given list of paths
      *
      * @param output
      * @param max
@@ -198,7 +197,7 @@ public class GraphImplementation implements GraphADT {
 
 
     /**
-     * Calculates how many line switches between start node and end node
+     * Calculates how many line switches between start station and end station
      *
      * @param endPath
      * @return The number of line switches
